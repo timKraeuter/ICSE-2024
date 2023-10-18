@@ -24,7 +24,6 @@
 \acmConference[ICSE 2024]{46th International Conference on Software Engineering}{April 2024}{Lisbon, Portugal}
 
 % My packages
-\usepackage{orcidlink} % Orcid links --> Maybe not needed since the names are linking?
 % My packages end
 
 %%
@@ -36,7 +35,7 @@
 %% allowing the author to define a "short title" to be used in page headers.
 \title{Implementing the Visual Debugger: An Experience report}
 
-\author{Tim Kr\"{a}uter \orcidlink{0000-0003-1795-0611}}
+\author{Tim Kr\"{a}uter}
 \email{tkra@hvl.no}
 \orcid{0000-0003-1795-0611}
 \affiliation{%
@@ -45,7 +44,7 @@
   \country{Norway}
 }
 
-\author{Adrian Rutle \orcidlink{0000-0002-4158-1644}}
+\author{Adrian Rutle}
 \email{aru@hvl.no}
 \orcid{0000-0002-4158-1644}
 \affiliation{%
@@ -54,7 +53,7 @@
   \country{Norway}
 }
 
-\author{Harald K\"{o}nig \orcidlink{0000-0001-6304-6311}}
+\author{Harald K\"{o}nig}
 \email{harald.koenig@fhdw.de}
 \orcid{0000-0001-6304-6311}
 \affiliation{%
@@ -67,7 +66,7 @@
   \country{Norway}
 }
 
-\author{Yngve Lamo \orcidlink{0000-0001-9196-1779}}
+\author{Yngve Lamo}
 \email{yla@hvl.no}
 \orcid{0000-0001-9196-1779}
 \affiliation{%
@@ -86,32 +85,48 @@
 % }
 
 \renewcommand{\shortauthors}{Kräuter et al.}
+% 4 pages + 1 page of references.
 
 %%
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
   TODO: Abstract
+A demonstration of our tool is available at \url{https://www.youtube.com/watch?v=lU_OgotweRk}.
 \end{abstract}
 
-\keywords{IDE, Plugin, IntelliJ IDEA Plugin, Experience Report, Debugging, Visual Debugging, Visual Debugger, Software Visualization}
+\keywords{IDE, Plugin, Debugging, Visual Debugging, Experience Report, Software Visualization}
 
-\received{9 November 2023}
-% \received[revised]{12 March 2009}
-% \received[accepted]{5 June 2009}
+% Fitting topics from the workshop:
+% 1. The development of plugins, add-ons, and extensions for IDEs.
+% 2. Visualizations in the IDEs.
+% 3. Anecdotal experience about why a certain tool or research approach was not implemented on top of the IDE infrastructure but researchers chose alternatives (e.g., a CLI tool), what the blockers were, and how the IDEs can improve to become more convenient for prototyping.
+
+\received{7 December 2023}
+% \received[revised]{7 December 2023}
+% \received[accepted]{11 January 2024}
 
 \maketitle
 
 \section{Introduction}
+\cite{krauterVisualDebuggerTool2022}
+\section{The Visual Debugger Tool}
+\cite{krauterVisualDebuggerTool2022}
 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\linewidth]{images/VD-architecture.pdf}
   \caption{Visual Debugger Architecture}
 \end{figure}
+\section{Deep dive: IDE Integration}
+\section{Related work}
+\section{Conclusion}
 
-\cite{krauterVisualDebuggerTool2022}
-\cite{krauterBehavioralConsistencyMultimodeling2023}
+IntelliJ marketplace: \cite{timkrauterVisualDebuggerIntelliJ2023}
+
+Source code: \cite{timkrauterVisualDebuggerTool2023}
+
+Object diagram modeler: \cite{timkrauterObjectDiagramModeler2023}
 
 % \section{Acknowledgments}
 

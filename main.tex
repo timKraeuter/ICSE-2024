@@ -117,7 +117,7 @@ A demonstration of the visual debugger is available at \url{https://www.youtube.
 \section{Introduction}
 % Context about the tool --> More high level do not repeat too much regarding section 2.
 This paper details the experience of implementing the visual debugger \cite{krauterVisualDebuggerTool2022}.
-The tool is available for \intellij and Android studio as a plugin, but its architecture makes it easily adaptable to other Integrated Development Environments (IDEs) \cite{timkrauterVisualDebuggerIntelliJ2023}.
+The tool is available for \intellij and Android studio as a plugin \cite{timkrauterVisualDebuggerIntelliJ2023}, but its architecture makes it easily adaptable to other Integrated Development Environments (IDEs) \cite{krauterVisualDebuggerTool2022}.
 
 % Motivation for this report?
 % Roadblocks hampering full IDE integration: Swing, Tradeoff tight integration and reusability
@@ -131,10 +131,28 @@ Finally, we discuss related work in \cref{sec:relatedWork} and conclude in \cref
 
 \section{The Visual Debugger} \label{sec:visualDebugger}
 % What can the tool do?
-The Visual Debugger is an open-source \intellij plugin that visualizes debugging information as an object diagram \cite{timkrauterVisualDebuggerTool2023}.
-It is available for \intellij and Android Studio through the JetBrains Marketplace \cite{timkrauterVisualDebuggerIntelliJ2023}.
-% Why is this useful?
+The Visual Debugger is an open-source \intellij plugin that visualizes the debugging variables as an object diagram to foster program comprehension.
+It is available for \intellij and Android Studio through the JetBrains Marketplace \cite{timkrauterVisualDebuggerIntelliJ2023, timkrauterVisualDebuggerTool2023}.
+% Motivation
+Debugging information might not present in the top-level variables and has to be obtained by digging multiple levels (following links to related objects) deep into different variables.
+Thus, in specific scenarios, especially when data is hierarchically structured, a graphical representation results in faster and better understanding of the debugging information \cite{krauterVisualDebuggerTool2022}.
 
+% How does the tool work. Give an example
+\subsection{Example}
+
+\subsection{Design Principles}
+% Inspired by https://github.com/bpmn-io/design-principles
+% Take-aways, key design principles/goals
+% Straight forward
+Using the the Visual debugger is \textit{straightforward} since it becomes automatically available during debugging in the IDE.
+% Familiar
+Similar to the traditional textual debugging it allows interactions to explore debugging variables in more detail.
+% Non-intrusive
+In addition, it is \textit{non-intrusive} since it can be used alongside the traditional textual debugging available in the IDE.
+% Minimalistic: Less is more
+
+
+\subsection{Architecture}
 % How does the tool achieve this? Architecture and details.
 
 \begin{figure}[ht]
@@ -151,11 +169,16 @@ Our tool's downloads doubled compared to the roughly 2700 downloads on the 21st 
 
 \section{Lessons Learned \& Roadblocks} \label{sec:lessonsLearned}
 
+% Roadblock: Missing APIS
+% \subsection{IDE APIs}
+% Go plugin not possible due to lacking APIs? --> Access to the APIs needed to integrate plugins with the IDE deeply. Deeper integration means less portability (to other ides) but a better user experience.
+% Or it is possible but the integration would not be nice! Since now two people connect to the same process or something similar?
+
 % \section{Improvements to the Visual Debugger}
 % Going back in time, i.e., showing previous debugging states. Show class/file and line information somewhere in the UI.
 % Highlighting changes.
 % Smarter UI. Shows if more information is available (colors and icons). --> Colors and overlays can be adapted from BPMN-js
-% Go plugin not possible due to lacking APIs? --> Access to the APIs needed to integrate plugins with the IDE deeply. Deeper integration means less portability (to other ides) but a better user experience.
+
 
 \section{Related work} \label{sec:relatedWork}
 

@@ -34,7 +34,11 @@
 %%
 %% The "title" command has an optional parameter,
 %% allowing the author to define a "short title" to be used in page headers.
-\title{Implementing the Visual Debugger: An Experience report}
+\title{Implementing the Visual Debugger: Past, Present, and Future}
+% Alternative titles
+% Implementing the Visual Debugger: Past, Present, and Future
+% Implementing the Visual Debugger: Past, An experience report
+% Something regarding IDE integration?
 
 \author{Tim Kr\"{a}uter}
 \email{tkra@hvl.no}
@@ -86,8 +90,8 @@
 % }
 
 \renewcommand{\shortauthors}{Kräuter et al.}
-\newcommand{\intellij}{IntelliJ IDEA}
-% 4 pages + 1 page of references.
+\newcommand{\intellij}{IntelliJ IDEA } % <-- Space has to be there
+% Four pages + 1 page of references.
 
 %%
 %% The abstract is a short summary of the work to be presented in the
@@ -97,7 +101,7 @@
 A demonstration of the visual debugger is available at \url{https://www.youtube.com/watch?v=lU_OgotweRk}.
 \end{abstract}
 
-\keywords{IDE, Plugin, Debugging, Visual Debugging, Experience Report, Software Visualization}
+\keywords{IDE integration, Plugin, Debugging, Visual Debugging, Experience Report}
 
 % Fitting topics from the workshop:
 % 1. The development of plugins, add-ons, and extensions for IDEs.
@@ -111,9 +115,9 @@ A demonstration of the visual debugger is available at \url{https://www.youtube.
 \maketitle
 
 \section{Introduction}
-% Context about the tool
-This paper details the experience gained from implementing the visual debugger \cite{krauterVisualDebuggerTool2022}.
-The tool is integrated into \intellij \cite{timkrauterVisualDebuggerIntelliJ2023} but its architecture makes it also easily adoptable for other Integrated Development Environments (IDEs).
+% Context about the tool --> More high level do not repeat too much regarding section 2.
+This paper details the experience of implementing the visual debugger \cite{krauterVisualDebuggerTool2022}.
+The tool is available for \intellij and Android studio as a plugin, but its architecture makes it easily adaptable to other Integrated Development Environments (IDEs) \cite{timkrauterVisualDebuggerIntelliJ2023}.
 
 % Motivation for this report?
 % Roadblocks hampering full IDE integration: Swing, Tradeoff tight integration and reusability
@@ -121,29 +125,41 @@ The tool is integrated into \intellij \cite{timkrauterVisualDebuggerIntelliJ2023
 
 % Paper outline
 The remainder of this paper is structured as follows.
-We describe the visual debugger tool in detail (\cref{sec:visualDebugger}).
+We describe the visual debugger tool in detail (\cref{sec:visualDebugger}) and outline the lessons we learned and roadblocks we encountered in \cref{sec:lessonsLearned}.
 Finally, we discuss related work in \cref{sec:relatedWork} and conclude in \cref{sec:conclusion}.
 
 
-\section{The Visual Debugger Tool} \label{sec:visualDebugger}
+\section{The Visual Debugger} \label{sec:visualDebugger}
+% What can the tool do?
+The Visual Debugger is an open-source \intellij plugin that visualizes debugging information as an object diagram \cite{timkrauterVisualDebuggerTool2023}.
+It is available for \intellij and Android Studio through the JetBrains Marketplace \cite{timkrauterVisualDebuggerIntelliJ2023}.
+% Why is this useful?
 
-\cite{krauterVisualDebuggerTool2022}
+% How does the tool achieve this? Architecture and details.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\linewidth]{images/VD-architecture.pdf}
+  \includegraphics[width=0.7\linewidth]{images/visual-debugger.pdf}
   \caption{Visual Debugger Architecture}
 \end{figure}
+% Hooks seamlessly into the IntelliJ debugging process using provided APIs.
+% has a debugger integrated into the tool, which is not the interactive and interactive one using the WebSocket connection shown in the architecture. Why two is described later maybe teased here: I don't want to use Swing. Swing tools like yfiles are expensive and unsuitable for "free, open-source plugins" <-- check this claim.
 
-\section{Lessons Learned: IDE Integration} \label{sec:lessonsLearned}
+% Feedback for the tool and current vs previous downloads.
+So far, we have received only positive feedback regarding the visual debugger, and it was downloaded nearly 6600 times \footnote{Last checked on the 26th of October, 2023, see \cite{timkrauterVisualDebuggerIntelliJ2023}.}.
+Our tool's downloads doubled compared to the roughly 2700 downloads on the 21st of Juli, 2022, when we published our research paper \cite{krauterVisualDebuggerTool2022} about the visual debugger.
+
+\section{Lessons Learned \& Roadblocks} \label{sec:lessonsLearned}
+
+% \section{Improvements to the Visual Debugger}
+% Going back in time, i.e., showing previous debugging states. Show class/file and line information somewhere in the UI.
+% Highlighting changes.
+% Smarter UI. Shows if more information is available (colors and icons). --> Colors and overlays can be adapted from BPMN-js
+% Go plugin not possible due to lacking APIs? --> Access to the APIs needed to integrate plugins with the IDE deeply. Deeper integration means less portability (to other ides) but a better user experience.
 
 \section{Related work} \label{sec:relatedWork}
 
 \section{Conclusion} \label{sec:conclusion}
-
-IntelliJ marketplace: \cite{timkrauterVisualDebuggerIntelliJ2023}
-
-Source code: \cite{timkrauterVisualDebuggerTool2023}
 
 Object diagram modeler: \cite{timkrauterObjectDiagramModeler2023}
 

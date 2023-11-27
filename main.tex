@@ -34,10 +34,10 @@
 %%
 %% The "title" command has an optional parameter,
 %% allowing the author to define a "short title" to be used in page headers.
-\title{Implementing the Visual Debugger: Past, Present, and Future}
+\title{Implementing the visual debugger: Past, Present, and Future}
 % Alternative titles
-% Implementing the Visual Debugger: Past, Present, and Future
-% Implementing the Visual Debugger: Past, An experience report
+% Implementing the visual debugger: Past, Present, and Future
+% Implementing the visual debugger: Past, An experience report
 % Something regarding IDE integration?
 
 \author{Tim Kr\"{a}uter}
@@ -90,18 +90,17 @@
 }
 
 \renewcommand{\shortauthors}{Kräuter et al.}
-\newcommand{\intellij}{IntelliJ IDEA } % <-- Space has to be there
+\newcommand{\intellij}{IntelliJ IDEA} % <-- Space has to be there
 % Four pages + 1 page of references.
 
 %%
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-  TODO: Abstract
-A demonstration of the visual debugger is available at \url{https://www.youtube.com/watch?v=lU_OgotweRk}.
+  TODO: Abstract.
 \end{abstract}
 
-\keywords{IDE integration, Plugin, Debugging, Visual Debugging, Experience Report}
+\keywords{Debugging, Visual Debugging, Plugin, IDE, IDE Integration}
 
 % Fitting topics from the workshop:
 % 1. The development of plugins, add-ons, and extensions for IDEs.
@@ -117,7 +116,7 @@ A demonstration of the visual debugger is available at \url{https://www.youtube.
 \section{Introduction}
 % Context about the tool --> More high-level, do not repeat too much regarding section 2.
 This paper details the experience of implementing the visual debugger \cite{krauterVisualDebuggerTool2022}.
-The tool is available for \intellij and Android studio as a plugin \cite{timkrauterVisualDebuggerIntelliJ2023}, but its architecture makes it easily adaptable to other Integrated Development Environments (IDEs) \cite{krauterVisualDebuggerTool2022}.
+The tool is available for \intellij{} and Android studio as a plugin \cite{timkrauterVisualDebuggerIntelliJ2023}, but its architecture makes it easily adaptable to other Integrated Development Environments (IDEs) \cite{krauterVisualDebuggerTool2022}.
 
 % Motivation for this report?
 % Roadblocks hampering full IDE integration: Swing, Tradeoff tight integration and reusability
@@ -130,20 +129,20 @@ We describe the visual debugger tool in detail (\cref{sec:visualDebugger}) and o
 Finally, we discuss related work in \cref{sec:relatedWork} and conclude in \cref{sec:conclusion}.
 
 
-\section{The Visual Debugger} \label{sec:visualDebugger}
+\section{The visual debugger} \label{sec:visualDebugger}
 % What can the tool do?
-The Visual Debugger is an open-source \intellij plugin that visualizes the debugging variables as an object diagram to foster program comprehension.
-It is available for \intellij and Android Studio through the JetBrains Marketplace \cite{timkrauterVisualDebuggerIntelliJ2023, timkrauterVisualDebuggerTool2023}.
+The visual debugger is an open-source \intellij{} plugin that visualizes the debugging variables as an object diagram to foster program comprehension.
+It is available for \intellij{} and Android Studio through the JetBrains Marketplace \cite{timkrauterVisualDebuggerIntelliJ2023, timkrauterVisualDebuggerTool2023}.
 % Motivation
 Debugging information might not be present in the top-level variables and has to be obtained by digging multiple levels (following links to related objects) deep into different variables.
 Thus, in specific scenarios, especially when data is hierarchically structured, a graphical representation results in a faster and better understanding of the debugging information \cite{krauterVisualDebuggerTool2022}.
 
 Additional artifacts, including source code, a demonstration of the visual debugger tool, and a description of the Visual Debugging API, can be found in \cite{timkrauterICSE2024Artifacts2023}.
 
-% How does the tool work? Give an example and short description merge the design principles part into here and look at the description in the old paper
-\subsection{Example}
+\subsection{Description}
 
-% Textual figure
+Traditionally, debugging information is represented textually, such as in \autoref{fig:variablesIntellij}, which shows a screenshot of the debugging variables view in \intellij.
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.4\textwidth]{images/variables.png}
@@ -151,47 +150,56 @@ Additional artifacts, including source code, a demonstration of the visual debug
     \label{fig:variablesIntellij}
 \end{figure}
 
-% Graphical figure
+The visual debugger will represent the same information graphically as an object diagram.
+Using the visual debugger is \textit{straightforward} since it becomes available automatically during debugging in the IDE.
+After activating the visual debugger, it continuously visualizes the variables in the scope of the debugging session (see, for example, \autoref{fig:variablesVisualDebugger}).
+\autoref{fig:variablesVisualDebugger} contains the same objects and level of detail as \autoref{fig:variablesIntellij}.
+There is a little more debug information in \autoref{fig:variablesIntellij} due to well-written \textsf{toString()} methods which are used by \intellij{}.
+In addition, the coloring in \autoref{fig:variablesVisualDebugger} highlights variable changes and additions, a new feature of the visual debugger discussed in \autoref{subsec:improvements}.
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.475\textwidth]{images/variables-visual-debugger.png}
-    \caption{Visual Debugger visualization comparable to \cref{fig:variablesIntellij}}
-    \label{fig:visualDebuggerVariables}
+    \caption{Visual debugger visualization comparable to \cref{fig:variablesIntellij}}
+    \label{fig:variablesVisualDebugger}
 \end{figure}
 
-% Mention video --> Make 2.0 video. Maybe also make artifacts.
+The graphical visualization does not replace the textual debugging view but aims to improve program comprehension during debugging\cite{krauterVisualDebuggerTool2022}.
+Concretely, the visual debugger is \textit{non-intrusive} since it can be used alongside the traditional textual debugging available in the IDE.
 
-Using the Visual debugger is \textit{straightforward} since it becomes automatically available during debugging in the IDE.
-% Familiar
-It allows interactions to explore debugging variables in more detail like traditional textual debugging.
-% Non-intrusive
-In addition, it is \textit{non-intrusive} since it can be used alongside the traditional textual debugging available in the IDE.
-% Minimalistic: Less is more
+The visual debugger automatically updates the debug information just as the \intellij{} debugger whenever a user steps through the source code or a new breakpoint is reached.
+Moreover, children of a debugging variable can be loaded by double-clicking an object in the object diagram, similar to how it works in most textual debuggers.
+For example, in \autoref{fig:variablesVisualDebugger}, all children of the green object were loaded.
+The goal is to make the visual debugger \textit{familiar} by adopting how textual debuggers work such that a transition is smooth.
+% Minimalistic: Less is more --> Not adopt all features since this doesn't make sense.
 
+More information about the visual debugger, including a typical usage scenario, can be found in \cite{krauterVisualDebuggerTool2022}.
+% TODO: Make video 2.0 and update link.
+In addition, a demonstration of the visual debugger is available at \url{https://www.youtube.com/watch?v=lU_OgotweRk}, and the tool can be installed using \cite{timkrauterVisualDebuggerIntelliJ2023}.
 
 \subsection{Architecture}
 % How does the tool achieve this? Architecture and details.
+% Structure into two components --> Important for new features and roadblocks later.
 
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.7\linewidth]{images/visual-debugger.pdf}
-  \caption{Visual Debugger Architecture}
+  \caption{Visual debugger Architecture}
 \end{figure}
-% Hooks seamlessly into the IntelliJ debugging process using provided APIs.
 % has a debugger integrated into the tool, which is not the interactive and interactive one using the WebSocket connection shown in the architecture. Why two is described later may be teased here: I don't want to use Swing. Swing tools like yfiles are expensive and unsuitable for "free, open-source plugins" <-- Check this claim.
 
 % Feedback for the tool and current vs previous downloads.
 So far, we have received only positive feedback regarding the visual debugger, and it was downloaded nearly 6600 times \footnote{Last checked on the 26th of October, 2023, see \cite{timkrauterVisualDebuggerIntelliJ2023}.}.
-Our tool's downloads doubled compared to the roughly 2700 downloads on the 21st of Juli, 2022, when we published our research paper \cite{krauterVisualDebuggerTool2022} about the visual debugger.
+Our tool's downloads doubled compared to the roughly 2700 downloads on the 21st of Juli, 2022, when we published our first research paper \cite{krauterVisualDebuggerTool2022} about the visual debugger.
 
-\subsection{Improvements}
+\subsection{Improvements} \label{subsec:improvements}
 We improved the visual debugger by adding two new key features.
 
 % Visualizing changes
 \textbf{(1)} The \textit{visualization component} of the visual debugger now \textit{highlights changes} using colors and overlays in the object diagram.
 New objects and links are colored green, while changes to existing elements lead to orange coloring.
 Computing and highlighting the changes is enabled by default but can be switched off.
-\autoref{fig:visualDebuggerVariables} shows the new change visualization by highlighting three changed, and one added object accordingly.
+\autoref{fig:variablesVisualDebugger} shows the new change visualization by highlighting three changed, and one added object accordingly.
 % Motivation
 A software engineer is usually most interested in the changes that occur to the objects during debugging.
 Our color-based visualization of changes in the object diagram makes it easier for a software engineer to see changes even when dealing with a complex debugging situation with multiple connected objects.
@@ -207,6 +215,7 @@ The debug history's length is configurable or can be turned off entirely.
 % Motivation
 As described earlier, software engineers are most interested in how variables change during debugging.
 Consequently, to not only highlight differences to the previous step, we save the previous debugging information in a debug history.
+% TODO: Potentially even step forward!
 A software engineer can thus inspect the previously shown debug information and step as far back as he configured.
 The visual debugger always shows where the debug information was collected in the source code, and highlights changes compared to the previous debugging step.
 In addition, one can still export the debug information to an image or even edit it in our object diagram modeler \cite{timkrauterObjectdiagramjs2023} for documentation purposes \cite{krauterVisualDebuggerTool2022}.

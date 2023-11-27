@@ -138,14 +138,29 @@ It is available for \intellij and Android Studio through the JetBrains Marketpla
 Debugging information might not be present in the top-level variables and has to be obtained by digging multiple levels (following links to related objects) deep into different variables.
 Thus, in specific scenarios, especially when data is hierarchically structured, a graphical representation results in a faster and better understanding of the debugging information \cite{krauterVisualDebuggerTool2022}.
 
+% TODO: Link artifacts using zenodo here.
+% Additional artifacts, including source code, a demonstration of the visual debugger tool, and a description of the Visual Debugging API, can be found in \cite{timkrauterArtifactsICSE2024}.
+
 % How does the tool work? Give an example
 \subsection{Example}
 
 % Textual figure
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/variables.png}
+    \caption{Variables during debugging in \intellij}
+    \label{fig:variablesIntellij}
+\end{figure}
 
 % Graphical figure
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.475\textwidth]{images/variables-visual-debugger.png}
+    \caption{Visual Debugger visualization comparable to \cref{fig:variablesIntellij}}
+    \label{fig:visualDebuggerVariables}
+\end{figure}
 
-% Mention video --> Make 2.0 video. Maybe also make artifacts
+% Mention video --> Make 2.0 video. Maybe also make artifacts.
 
 \subsection{Design Principles}
 % Inspired by https://github.com/bpmn-io/design-principles

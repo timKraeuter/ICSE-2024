@@ -115,12 +115,13 @@ A demonstration of the visual debugger is available at \url{https://www.youtube.
 \maketitle
 
 \section{Introduction}
-% Context about the tool --> More high level do not repeat too much regarding section 2.
+% Context about the tool --> More high-level, do not repeat too much regarding section 2.
 This paper details the experience of implementing the visual debugger \cite{krauterVisualDebuggerTool2022}.
 The tool is available for \intellij and Android studio as a plugin \cite{timkrauterVisualDebuggerIntelliJ2023}, but its architecture makes it easily adaptable to other Integrated Development Environments (IDEs) \cite{krauterVisualDebuggerTool2022}.
 
 % Motivation for this report?
 % Roadblocks hampering full IDE integration: Swing, Tradeoff tight integration and reusability
+% Implementing for more IDEs and standard debugging protocols
 % Open problems due to IDE integration: Performance?
 
 % Paper outline
@@ -144,7 +145,7 @@ Thus, in specific scenarios, especially when data is hierarchically structured, 
 
 % Graphical figure
 
-% Mention video
+% Mention video --> Make 2.0 video. Maybe also make artifacts
 
 \subsection{Design Principles}
 % Inspired by https://github.com/bpmn-io/design-principles
@@ -152,7 +153,7 @@ Thus, in specific scenarios, especially when data is hierarchically structured, 
 % Straight forward
 Using the Visual debugger is \textit{straightforward} since it becomes automatically available during debugging in the IDE.
 % Familiar
-Similar to traditional textual debugging, it allows interactions to explore debugging variables in more detail.
+It allows interactions to explore debugging variables in more detail like traditional textual debugging.
 % Non-intrusive
 In addition, it is \textit{non-intrusive} since it can be used alongside the traditional textual debugging available in the IDE.
 % Minimalistic: Less is more

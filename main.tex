@@ -137,6 +137,10 @@ It is available for \intellij{} and Android Studio through the JetBrains Marketp
 Debugging information might not be present in the top-level variables and has to be obtained by digging multiple levels (following links to related objects) deep into different variables.
 Thus, in specific scenarios, especially when data is hierarchically structured, a graphical representation results in a faster and better understanding of the debugging information \cite{krauterVisualDebuggerTool2022}.
 
+% Feedback for the tool and current vs previous downloads.
+Until now, we have only received positive feedback regarding the visual debugger, which now has over 7200 downloads\footnote{Last checked on the 28th of November, 2023, see \cite{timkrauterVisualDebuggerIntelliJ2023}.}.
+This marks a twofold increase in downloads compared to the initial release of our research paper \cite{krauterVisualDebuggerTool2022} on July 21, 2022, which garnered approximately 2700 downloads.
+
 Additional artifacts, including source code, a demonstration of the visual debugger tool, and a description of the Visual Debugging API, can be found in \cite{timkrauterICSE2024Artifacts2023}.
 
 \subsection{Description}
@@ -178,19 +182,22 @@ More information about the visual debugger, including a typical usage scenario, 
 In addition, a demonstration of the visual debugger is available at \url{https://www.youtube.com/watch?v=lU_OgotweRk}, and the tool can be installed using \cite{timkrauterVisualDebuggerIntelliJ2023}.
 
 \subsection{Architecture}
-% How does the tool achieve this? Architecture and details.
 % Structure into two components --> Important for new features and roadblocks later.
+The visual debugger is separated into two independent components communicating through the \textit{Visual Debugging API} \cite{krauterVisualDebuggerTool2022}.
+\autoref{fig:architecture} summarizes the architecture of the visual debugger.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.7\linewidth]{images/visual-debugger.pdf}
-  \caption{Visual debugger Architecture}
+  \includegraphics[width=0.8\linewidth]{images/visual-debugger-architecture.pdf}
+  \caption{Visual debugger architecture}
+  \label{fig:architecture}
 \end{figure}
-% has a debugger integrated into the tool, which is not the interactive and interactive one using the WebSocket connection shown in the architecture. Why two is described later may be teased here: I don't want to use Swing. Swing tools like yfiles are expensive and unsuitable for "free, open-source plugins" <-- Check this claim.
 
-% Feedback for the tool and current vs previous downloads.
-So far, we have received only positive feedback regarding the visual debugger, and it was downloaded nearly 6600 times \footnote{Last checked on the 26th of October, 2023, see \cite{timkrauterVisualDebuggerIntelliJ2023}.}.
-Our tool's downloads doubled compared to the roughly 2700 downloads on the 21st of Juli, 2022, when we published our first research paper \cite{krauterVisualDebuggerTool2022} about the visual debugger.
+The first component, the \textit{debugging component} integrates with \intellij{}, and its primary function is to acquire and refresh debugging information throughout the debugging process.
+The debugging component makes this information available via a WebSocket server that implements our Visual Debugging API.
+Upon establishing a connection to the Visual Debugging API, a client receives real-time updates with the latest debugging data and can request to load children for an existing object.
+
+% has a debugger integrated into the tool, which is not the interactive and interactive one using the WebSocket connection shown in the architecture. Why two is described later may be teased here: I don't want to use Swing. Swing tools like yfiles are expensive and unsuitable for "free, open-source plugins" <-- Check this claim.
 
 \subsection{Improvements} \label{subsec:improvements}
 We improved the visual debugger by adding two new key features.

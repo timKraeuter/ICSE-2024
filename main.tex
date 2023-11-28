@@ -183,6 +183,8 @@ In addition, a demonstration of the visual debugger is available at \url{https:/
 
 \subsection{Architecture}
 % Structure into two components --> Important for new features and roadblocks later.
+In this section, we briefly recap the architecture of the visual debugger.
+% The architecture plays an important role in the new features of the visual debugger and helps us understand the roadblocks we have encountered during development.
 The visual debugger is separated into two independent components communicating through the \textit{Visual Debugging API} \cite{krauterVisualDebuggerTool2022}.
 \autoref{fig:architecture} summarizes the architecture of the visual debugger.
 
@@ -197,8 +199,17 @@ The first component, the \textit{debugging component} integrates with \intellij{
 The debugging component makes this information available via a WebSocket server that implements our Visual Debugging API.
 Upon establishing a connection to the Visual Debugging API, a client receives real-time updates with the latest debugging data and can request to load children for an existing object.
 
-% has a debugger integrated into the tool, which is not the interactive and interactive one using the WebSocket connection shown in the architecture. Why two is described later may be teased here: I don't want to use Swing. Swing tools like yfiles are expensive and unsuitable for "free, open-source plugins" <-- Check this claim.
+The second component, the \textit{visualization component}, portrays debugging information as an object diagram for better understanding (refer to \autoref{fig:variablesVisualDebugger} for an illustration).
+It is implemented using web technologies and our object diagram library \cite{timkrauterObjectdiagramjs2023} to visualize the debug information.
+Additionally, it leverages the Visual Debugging API to communicate with the debugging component.
+Thus, it is agnostic of the IDE used for debugging and can even be reused for other programming languages than Java/Kotlin.
+In practice, the visualization component is hosted on a web server as part of the visual debugger plugin.
 
+The downside to this flexibility is that the visual debugger is not entirely integrated into \intellij{}, as the visualization occurs in a browser external to the IDE.
+The rationale behind opting for this approach instead of full integration is discussed in \autoref{sec:lessonsLearned}.
+
+% Improvements \& New Features?
+% Improvements would be better loading
 \subsection{Improvements} \label{subsec:improvements}
 We improved the visual debugger by adding two new key features.
 

@@ -132,7 +132,9 @@ Finally, we discuss related work in \cref{sec:relatedWork} and conclude in \cref
 \section{The visual debugger} \label{sec:visualDebugger}
 % What can the tool do?
 The visual debugger is an open-source \intellij{} plugin that visualizes the debugging variables as an object diagram to foster program comprehension.
-It is available for \intellij{} and Android Studio through the JetBrains Marketplace \cite{timkrauterVisualDebuggerIntelliJ2023, timkrauterVisualDebuggerTool2023}.
+It is available for \intellij{} and Android Studio through the JetBrains Marketplace \cite{timkrauterVisualDebuggerIntelliJ2023, timkrauterVisualDebuggerTool2023} making use of the IntelliJ Platform \cite{kurbatovaIntelliJPlatformFramework2021}.
+Our plugin was integrated into \intellij{}, the Java IDE with the highest popularity, with approximately 70\% market share as per the JVM Ecosystem Report 2021 \cite{brianvermeerJVMEcosystemReport2021}.
+
 % Motivation
 Debugging information might not be present in the top-level variables and has to be obtained by digging multiple levels (following links to related objects) deep into different variables.
 Thus, in specific scenarios, especially when data is hierarchically structured, a graphical representation results in a faster and better understanding of the debugging information \cite{krauterVisualDebuggerTool2022}.
@@ -270,12 +272,18 @@ Related citations:
 \section{Related work} \label{sec:relatedWork}
 
 \section{Conclusion \& Future work} \label{sec:conclusion}
+% Conclusion
 
 % Summarize stats of the plugin --> Interest in other languages such as GoLang
 % Summarize new features
 % Summarize roadblocks and lessons learned
 
 % Summarize the design principles of the debugger: non-invasive, familiar? -> no surprises, i.e., predictable, intuitive behavior, simple (less is more)
+
+
+% Future work
+Implement for other IDEs and code editors such as Eclipse \cite{desrivieresEclipsePlatformIntegrating2004} and Visual Studio Code.
+
 % This summary could lead to the following empirical studies:
 % 1. Empirical study about the usability of the tool
 % 2. Does the visual debugger boost productivity in certain scenarios? Which scenarios? If yes, how much is the productivity boosted?

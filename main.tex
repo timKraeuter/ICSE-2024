@@ -259,31 +259,40 @@ The forum provides the rare opportunity to interact directly with \intellij{} de
 
 % Roadblock 1: IDE integration due to IDE UI technology --> See notes --> JCEF
 
-% Roadblock 2: Missing APIS
-% \subsection{IDE APIs}
-% Is the Go plugin not possible due to the lack of APIs? --> Access to the APIs needed to integrate plugins with the IDE deeply. Deeper integration means less portability (to other ideas) but a better user experience.
-% Or it is possible, but the integration would not be nice! Since now, we have two people connected to the same process or something similar.
-A possible solution would be the \textit{Debug Adapter Protocol} (DAP) \cite{microsoftDebugAdapterProtocol2023}.
+% Roadblock 2: Missing APIs for less popular IDEs.
+Users of the visual debugger have asked us if the plugin could be adapted to work with other IDEs and programming languages.
+For example, we would like to support debugging \textit{Go} applications inside the GoLand IDE.
+However, compared to \intellij{} plugins, there is no API to hook into debugging processes in GoLand.
+Thus, it is currently not possible to adapt the visual debugger for GoLand such that it seamlessly integrates with the IDE.
+Our visualization component cannot operate without a debugging component that provides debugging information from GoLand.
+This represents a major roadblock to adopting the visual debugger for other IDEs and programming languages.
+One could develop the necessary APIs and debugging components for each desired IDE and programming language combination.
+Nevertheless, there would be significant redundancy across all these implementations.
+
+A possible superior solution would be to utilize the \textit{Debug Adapter Protocol} (DAP) \cite{microsoftDebugAdapterProtocol2023}.
 The DAP is a sibling of the more popular \textit{Language Server Protocol} (LSP) \cite{microsoftLanguageServerProtocol2023} and standardizes an abstract protocol for how a development tool communicates with concrete debuggers.
-The motivation is that debuggers have to be implemented only once for each language and then can be reused in different IDEs, Editors, or other tools, such as our visual debugger, see \autoref{fig:DPA_Architecture}.
-Since not all current debuggers will adopt this protocol, an intermediary component is envisioned to adapt an existing debugger to the DPA \cite{microsoftDebugAdapterProtocol2023}, see \textit{debug adapters} in \autoref{fig:DPA_Architecture}.
+The motivation is that debuggers have to be implemented only once for each language and then can be reused in different IDEs, Editors, or other tools, such as our visual debugger, see \autoref{fig:DAP_Architecture}.
+Since not all current debuggers will adopt this protocol, an intermediary component is envisioned to adapt an existing debugger to the DAP \cite{microsoftDebugAdapterProtocol2023}, see \textit{debug adapters} in \autoref{fig:DAP_Architecture}.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=1\linewidth]{images/visual-debugger-DPA-architecture.pdf}
+  \includegraphics[width=1\linewidth]{images/visual-debugger-DAP-architecture.pdf}
   \caption{Debug Adapter Protocol Architecture \cite{microsoftDebugAdapterProtocol2023}}
-  \label{fig:DPA_Architecture}
+  \label{fig:DAP_Architecture}
 \end{figure}
 
-Like our visual debugging API, the DPA is independent of development tools (as shown on the left side of \autoref{fig:DPA_Architecture}) and is also language-agnostic (as depicted on the right side of \autoref{fig:DPA_Architecture}).
+Like our visual debugging API, the DAP is independent of development tools (as shown on the left side of \autoref{fig:DAP_Architecture}) and is also language-agnostic (as depicted on the right side of \autoref{fig:DAP_Architecture}).
 How JetBrains or other IDEs communicate with its integrated debuggers does not have to use the DAP.
 However, each IDE could provide debug adapters for the supported programming languages or integrate existing debug adapters into the IDE.
-Then, if the visual debugger supports the DAP, it can attach to the different debug adapters, which all provide the DAP, i.e., the same interface.
+In addition, using a standard protocol requires minimal documentation and leads to fewer support inquiries.
+
+If the visual debugger also supports the DAP in the future, it can attach to the different debug adapters, which all provide the DAP, i.e., the same interface.
 As a result, the visual debugger becomes compatible with any combination of IDE and programming language that provides a debug adapter.
 For example, the visual debugger could be automatically available for more JetBrains IDEs, such as GoLand (Go), RustRover (Rust), Rider (C\#), and more.
 
-Related citations:
-\cite{jeanjeanIDECodeReifying2021,raskVisualStudioCode2020,borkLanguageServerProtocol2023}
+After the success of the LSP, it seems like the DAP is on track to become the next standardized development tool functionality \cite{raskVisualStudioCode2020,borkLanguageServerProtocol2023}.
+The official page of the DAP lists 11 tools supporting the DAP, 67 debug adapters, and 11 DAP SDKs as of December 2024 \cite{microsoftDebugAdapterProtocol2023}, including, for example, a Go DAP implementation maintained by Google\footnote{\url{https://github.com/google/go-dap}}.
+Research is also conducted on the DAP to debug Domain-Specific Languages \cite{jeanjeanIDECodeReifying2021,enetProtocolBasedInteractiveDebugging2023}.
 
 \section{Related work} \label{sec:relatedWork}
 

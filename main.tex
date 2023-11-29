@@ -251,22 +251,34 @@ Thus, both features follow our aim of providing a reusable visualization of the 
 
 \section{Lessons Learned \& Roadblocks} \label{sec:lessonsLearned}
 
-% Roadblock 1: Missing APIS
+% Roadblock 1: IDE integration due to IDE UI technology --> See notes
+
+% Roadblock 2: Missing APIS
 % \subsection{IDE APIs}
 % Is the Go plugin not possible due to the lack of APIs? --> Access to the APIs needed to integrate plugins with the IDE deeply. Deeper integration means less portability (to other ideas) but a better user experience.
 % Or it is possible, but the integration would not be nice! Since now, we have two people connected to the same process or something similar.
+% Possible Solution DAP!
+DAP \cite{microsoftDebugAdapterProtocol2023}
 
-% Roadblock 2: IDE integration due to IDE UI technology --> See notes
+sibling of LSP \cite{microsoftLanguageServerProtocol2023}
 
-% Should also mention strong points: Forum with quick and helpful answers. For example our debugging loading.
+Related citations:
+\cite{jeanjeanIDECodeReifying2021,raskVisualStudioCode2020,borkLanguageServerProtocol2023}
+
+% Should also mention strong points: Forum with quick and helpful answers. For example, our debugging loading. --> One lessons learned ask precise detailed questions including your problem setting in the forum after investigating yourself
 
 \section{Related work} \label{sec:relatedWork}
 
-\section{Conclusion} \label{sec:conclusion}
+\section{Conclusion \& Future work} \label{sec:conclusion}
 
-% Summarize stats of the plugin --> Interest for other languages such as GoLang
+% Summarize stats of the plugin --> Interest in other languages such as GoLang
 % Summarize new features
 % Summarize roadblocks and lessons learned
+
+% Summarize the design principles of the debugger: non-invasive, familiar? -> no surprises, i.e., predictable, intuitive behavior, simple (less is more)
+% This summary could lead to the following empirical studies:
+% 1. Empirical study about the usability of the tool
+% 2. Does the visual debugger boost productivity in certain scenarios? Which scenarios? If yes, how much is the productivity boosted?
 
 % Add acknowledgments after review
 % \section{Acknowledgments}

@@ -257,16 +257,29 @@ If one asks precise, detailed questions, one receives helpful answers quickly, m
 For example, our new deferred loading of debug information discussed in \autoref{subsec:improvements} was enabled due to the \intellij{} forum.
 The forum provides the rare opportunity to interact directly with \intellij{} developers.
 
-% Roadblock 1: IDE integration due to IDE UI technology --> See notes
+% Roadblock 1: IDE integration due to IDE UI technology --> See notes --> JCEF
 
 % Roadblock 2: Missing APIS
 % \subsection{IDE APIs}
 % Is the Go plugin not possible due to the lack of APIs? --> Access to the APIs needed to integrate plugins with the IDE deeply. Deeper integration means less portability (to other ideas) but a better user experience.
 % Or it is possible, but the integration would not be nice! Since now, we have two people connected to the same process or something similar.
-% Possible Solution DAP!
-DAP \cite{microsoftDebugAdapterProtocol2023}
+A possible solution would be the Debug Adapter Protocol (DAP) \cite{microsoftDebugAdapterProtocol2023}.
+The DAP is a sibling of the more popular Language Server Protocol (LSP) \cite{microsoftLanguageServerProtocol2023} and standardizes an abstract protocol for how a development tool communicates with concrete debuggers.
+The motivation is that debuggers have to be implemented only once for each language and then can be reused in different IDEs, Editors, or other tools, such as our visual component, see \autoref{fig:DPA_Architecture}.
 
-sibling of LSP \cite{microsoftLanguageServerProtocol2023}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=1\linewidth]{images/visual-debugger-DPA-architecture.pdf}
+  \caption{Debug Adapter Protocol Architecture \cite{microsoftDebugAdapterProtocol2023}}
+  \label{fig:DPA_Architecture}
+\end{figure}
+
+Similar to our visual debugging API, the DPA is language-agnostic (right-side in \autoref{fig:DPA_Architecture}) and independent of development tools (left-side in \autoref{fig:DPA_Architecture}).
+How JetBrains or other IDEs communicate with its integrated debuggers does not have to use the DAP.
+However, each IDE could provide debug adapters for the supported programming languages or integrate existing debug adapters into the IDE.
+Then, the visualization component in our visual debugger could connect to the different debug adapters, which all provide the DAP, i.e., the same interface.
+Consequently, the visual debugger could then work with any IDE and programming language combination that provides a debug adapter.
+For example, the visual debugger could be automatically available for more IDEs on the IntelliJ Platform \cite{kurbatovaIntelliJPlatformFramework2021}, such as GoLand (Go), RustRover (Rust), Rider (C\#), and more.
 
 Related citations:
 \cite{jeanjeanIDECodeReifying2021,raskVisualStudioCode2020,borkLanguageServerProtocol2023}

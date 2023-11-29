@@ -241,7 +241,6 @@ The debug history's length is configurable or can be turned off entirely.
 % Motivation
 As described earlier, software engineers are most interested in how variables change during debugging.
 Consequently, to not only highlight differences to the previous step, we save the previous debugging information in a debug history.
-% TODO: Potentially even step forward!
 A software engineer can thus inspect the previously shown debug information and step as far back as he configured.
 The visual debugger always shows where the debug information was collected in the source code, and highlights changes compared to the previous debugging step.
 In addition, one can still export the debug information to an image or even edit it in our object diagram modeler \cite{timkrauterObjectdiagramjs2023} for documentation purposes \cite{krauterVisualDebuggerTool2022}.
@@ -252,6 +251,11 @@ Thus, both features follow our aim of providing a reusable visualization of the 
 % Smarter UI?. Shows if more information is available (colors and icons). --> Colors and overlays can be adapted from BPMN-js
 
 \section{Lessons Learned \& Roadblocks} \label{sec:lessonsLearned}
+The first lesson we learned is that more features are available during plugin development than are documented.
+Thus, after a thorough search in the documentation, it is beneficial to ask a question in the community forum for plugin development.
+If one asks precise, detailed questions, one receives helpful answers quickly, making the forum an immensely valuable resource.
+For example, our new deferred loading of debug information discussed in \autoref{subsec:improvements} was enabled due to the \intellij{} forum.
+The forum provides the rare opportunity to interact directly with \intellij{} developers.
 
 % Roadblock 1: IDE integration due to IDE UI technology --> See notes
 
@@ -266,8 +270,6 @@ sibling of LSP \cite{microsoftLanguageServerProtocol2023}
 
 Related citations:
 \cite{jeanjeanIDECodeReifying2021,raskVisualStudioCode2020,borkLanguageServerProtocol2023}
-
-% Should also mention strong points: Forum with quick and helpful answers. For example, our debugging loading. --> One lessons learned ask precise detailed questions including your problem setting in the forum after investigating yourself
 
 \section{Related work} \label{sec:relatedWork}
 

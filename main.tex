@@ -161,7 +161,7 @@ After activating the visual debugger, it continuously visualizes the variables i
 There is a little more debug information in \autoref{fig:variablesIntellij} due to well-written \textsf{toString()} methods which are used by \intellij{}.
 In addition, the coloring in \autoref{fig:variablesVisualDebugger} highlights variable changes and additions, a new feature of the visual debugger discussed in \autoref{subsec:improvements}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.475\textwidth]{images/variables-visual-debugger.png}
     \caption{Visual debugger visualization comparable to \cref{fig:variablesIntellij}}
@@ -208,13 +208,20 @@ In practice, the visualization component is hosted on a web server as part of th
 The downside to this flexibility is that the visual debugger is not entirely integrated into \intellij{}, as the visualization occurs in a browser external to the IDE.
 The rationale behind opting for this approach instead of full integration is discussed in \autoref{sec:lessonsLearned}.
 
-% Improvements \& New Features?
 % Improvements would be better loading
-\subsection{Improvements} \label{subsec:improvements}
-We improved the visual debugger by adding two new key features.
+\subsection{Improvements \& New Features} \label{subsec:improvements}
+A major improvement under the hood of the visual debugger is how debugging information is loaded.
+Previously, we had to pre-load and cache more debug information than was requested by the user since we could not load debug information on demand.
+The initial load invalidated the underlying stack frame supplied by the Java Debugging Interface (JDI).
+Now, we leverage the APIs provided by \intellij{}, which are a thin wrapper around the JDI.
+This enables us to defer loading additional debug information until explicitly required.
+Consequently, there is no longer a need to pre-load potentially unnecessary debug information.
+This optimization has improved performance, making the visual debugger applicable to more intricate debugging scenarios.
+
+Furthermore, we enhanced the visual debugger by introducing the following two new features:
 
 % Visualizing changes
-\textbf{(1)} The \textit{visualization component} of the visual debugger now \textit{highlights changes} using colors and overlays in the object diagram.
+\textbf{(1)} The visualization component of the visual debugger now \textit{highlights changes} using colors and overlays in the object diagram.
 New objects and links are colored green, while changes to existing elements lead to orange coloring.
 Computing and highlighting the changes is enabled by default but can be switched off.
 \autoref{fig:variablesVisualDebugger} shows the new change visualization by highlighting three changed, and one added object accordingly.
@@ -224,7 +231,6 @@ Our color-based visualization of changes in the object diagram makes it easier f
 
 % Implementation
 Changes can be calculated efficiently using unique object IDs provided during debugging.
-% TODO: the two components should be mentioned earlier in the architecture
 We implemented the change detection in the visualization component such that it can be reused across programming languages and IDEs \cite{timkrauterICSE2024Artifacts2023}.
 
 % Debug history
@@ -251,6 +257,8 @@ Thus, both features follow our aim of providing a reusable visualization of the 
 % Or it is possible, but the integration would not be nice! Since now, we have two people connected to the same process or something similar.
 
 % Roadblock 2: IDE integration due to IDE UI technology --> See notes
+
+% Should also mention strong points: Forum with quick and helpful answers. For example our debugging loading.
 
 \section{Related work} \label{sec:relatedWork}
 

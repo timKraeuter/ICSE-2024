@@ -49,6 +49,15 @@
   \country{Norway}
 }
 
+\author{Patrick Stünkel}
+\email{patrick.stuenkel@hvl.no}
+\orcid{0000-0002-0537-295X}
+\affiliation{
+  \institution{Western Norway University of Applied Sciences}
+  \city{Bergen}
+  \country{Norway}
+}
+
 \author{Adrian Rutle}
 \email{aru@hvl.no}
 \orcid{0000-0002-4158-1644}
@@ -80,15 +89,6 @@
   \country{Norway}
 }
 
-\author{Patrick Stünkel}
-\email{patrick.stuenkel@hvl.no}
-\orcid{0000-0002-0537-295X}
-\affiliation{
-  \institution{Western Norway University of Applied Sciences}
-  \city{Bergen}
-  \country{Norway}
-}
-
 \renewcommand{\shortauthors}{Kräuter et al.}
 \newcommand{\intellij}{IntelliJ IDEA} % <-- Space has to be there
 % Four pages + 1 page of references.
@@ -114,19 +114,22 @@
 \maketitle
 
 \section{Introduction}
-% Context about the tool --> More high-level, do not repeat too much regarding section 2.
-This paper details the experience of implementing the visual debugger \cite{krauterVisualDebuggerTool2022}.
-The tool is available for \intellij{} and Android studio as a plugin \cite{timkrauterVisualDebuggerIntelliJ2023}, but its architecture makes it easily adaptable to other Integrated Development Environments (IDEs) \cite{krauterVisualDebuggerTool2022}.
+This paper details the experience of implementing, maintaining, and improving the \textit{visual debugger} \cite{krauterVisualDebuggerTool2022}.
+The visual debugger is available for \intellij{} and Android studio as a plugin \cite{timkrauterVisualDebuggerIntelliJ2023}, but its architecture makes it easily adaptable to other Integrated Development Environments (IDEs) \cite{krauterVisualDebuggerTool2022}.
+% Briefly say what the plugin does
 
-% Motivation for this report?
+The contributions of this paper are twofold:
+(1) % Showcase the new features and improvements
+(2) % Lessons learned and roadblocks for IDE developers
+
 % Roadblocks hampering full IDE integration: Swing, Tradeoff tight integration and reusability
-% Implementing for more IDEs and standard debugging protocols
-% Open problems due to IDE integration: Performance?
+% Implementing more IDEs and standard debugging protocols
 
 % Paper outline
 The remainder of this paper is structured as follows.
-We describe the visual debugger tool in detail (\cref{sec:visualDebugger}) and outline the lessons we learned and roadblocks we encountered in \cref{sec:lessonsLearned}.
-Finally, we discuss related work in \cref{sec:relatedWork} and conclude in \cref{sec:conclusion}.
+We describe the visual debugger in (\cref{sec:visualDebugger}), including its architecture and the improvements and new features we have implemented recently.
+Then, we outline the lessons learned and roadblocks we encountered during development in \cref{sec:lessonsLearned} and how to possibly overcome them.
+Finally, we conclude in \cref{sec:conclusion}.
 
 
 \section{The visual debugger} \label{sec:visualDebugger}
@@ -192,7 +195,7 @@ The visual debugger is separated into two independent components communicating t
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{images/visual-debugger-architecture.pdf}
+  \includegraphics[width=0.7\linewidth]{images/visual-debugger-architecture.pdf}
   \caption{Visual debugger architecture}
   \label{fig:architecture}
 \end{figure}
@@ -329,17 +332,12 @@ After the success of the LSP, it seems like the DAP is on track to become the ne
 The official page of the DAP lists 11 tools supporting the DAP, 67 debug adapters, and 11 DAP SDKs as of December 2024 \cite{microsoftDebugAdapterProtocol2023}, including, for example, a Go DAP implementation maintained by Google\footnote{\url{https://github.com/google/go-dap}}.
 Research is also conducted on the DAP to debug Domain-Specific Languages \cite{jeanjeanIDECodeReifying2021,enetProtocolBasedInteractiveDebugging2023}.
 
-\section{Related work} \label{sec:relatedWork}
-
 \section{Conclusion \& Future work} \label{sec:conclusion}
 % Conclusion
 
 % Summarize stats of the plugin --> Interest in other languages such as GoLang
 % Summarize new features
 % Summarize roadblocks and lessons learned
-
-% Summarize the design principles of the debugger: non-invasive, familiar? -> no surprises, i.e., predictable, intuitive behavior, simple (less is more)
-
 
 % Future work
 Implement for other IDEs and code editors such as Eclipse \cite{desrivieresEclipsePlatformIntegrating2004} and Visual Studio Code.

@@ -33,8 +33,8 @@
 
 %%
 %% The "title" command has an optional parameter,
-%% allowing the author to define a "short title" to be used in page headers.
-\title{Implementing the visual debugger: Past, Present, and Future}
+%% allowing the author to define a "short title" in page headers.
+\title{Implementing the Visual Debugger: Past, Present, and Future}
 % Alternative titles
 % Implementing the visual debugger: Past, Present, and Future
 % Implementing the visual debugger: Past, An experience report
@@ -208,11 +208,26 @@ Thus, it is agnostic of the IDE used for debugging and can even be reused for ot
 In practice, the visualization component is hosted on a web server as part of the visual debugger plugin.
 
 The downside to this flexibility is that the visual debugger is not entirely integrated into \intellij{}, as the visualization occurs in a browser external to the IDE.
-The rationale behind opting for this approach instead of full integration is discussed in \autoref{sec:lessonsLearned}.
+The rationale behind opting for this approach instead of native IDE integration is discussed in \autoref{sec:lessonsLearned}.
+In addition, the next section discusses recent improvements to the visual debugger, which led to a better IDE integration despite a web-based UI.
 
 % Improvements would be better loading
 \subsection{Improvements \& New Features} \label{subsec:improvements}
-A major improvement under the hood of the visual debugger is how debugging information is loaded.
+We made two major improvements to the visual debugger, optimizing its integration with the IDE and expanding its applicability to more complex debugging scenarios.
+
+\textbf{Improvement (1):} We integrated an embedded browser into the visual debugger panel inside \intellij{}.
+The embedded browser uses the Java Chromium Embedded Framework (JCEF), available by default in \intellij{}.
+As a result, users now have the option to use the embedded instead of an external browser.
+Most of the functionality of our visualization component worked out of the box with the JCEF browser.
+Additionally, nearly all other features, for example, exporting object diagrams to XML/SVG, were successfully implemented using JCEF APIs.
+
+The Chromium Embedded Framework (CEF)\footnote{\url{https://github.com/chromiumembedded/cef}} is integrated with numerous programming languages, including the Java integration JCEF.
+The CEF plays a crucial role in many popular applications, for example, the cross-platform Steam Client\footnote{\url{https://developer.valvesoftware.com/wiki/Chromium_Embedded_Framework}}.
+However, integrating web applications into \intellij{} is not entirely seamless, which is also highlighted by the fact that using JCEF is still an experimental feature in \intellij{}.
+Consequently, we give each user the choice to use the embedded or external browser.
+We discuss the problems we faced using JCEF and possible improvements in \autoref{sec:lessonsLearned}.
+
+\textbf{Improvement (2):} We enhanced the loading mechanism for debugging information inside the visual debugger.
 Previously, we had to pre-load and cache more debug information than was requested by the user since we could not load debug information on demand.
 The initial load invalidated the underlying stack frame supplied by the Java Debugging Interface (JDI).
 Now, we leverage the APIs provided by \intellij{}, which are a thin wrapper around the JDI.
@@ -223,7 +238,7 @@ This optimization has improved performance, making the visual debugger applicabl
 Furthermore, we enhanced the visual debugger by introducing the following two new features:
 
 % Visualizing changes
-\textbf{(1)} The visualization component of the visual debugger now \textit{highlights changes} using colors and overlays in the object diagram.
+\textbf{Feature (1):} The visualization component of the visual debugger now \textit{highlights changes} using colors and overlays in the object diagram.
 New objects and links are colored green, while changes to existing elements lead to orange coloring.
 Computing and highlighting the changes is enabled by default but can be switched off.
 \autoref{fig:variablesVisualDebugger} shows the new change visualization by highlighting three changed, and one added object accordingly.
@@ -236,7 +251,7 @@ Changes can be calculated efficiently using unique object IDs provided during de
 We implemented the change detection in the visualization component such that it can be reused across programming languages and IDEs \cite{timkrauterICSE2024Artifacts2023}.
 
 % Debug history
-\textbf{(2)} Furthermore, the visualization component now keeps a \textit{debug history} so that a user can see debug information from previous debugging steps.
+\textbf{Feature (2):} Furthermore, the visualization component now keeps a \textit{debug history} so that a user can see debug information from previous debugging steps.
 The debug history's length is configurable or can be turned off entirely.
 % Motivation
 As described earlier, software engineers are most interested in how variables change during debugging.

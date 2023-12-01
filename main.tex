@@ -209,7 +209,7 @@ In practice, the visualization component is hosted on a web server as part of th
 
 The downside to this flexibility is that the visual debugger is not entirely integrated into \intellij{}, as the visualization occurs in a browser external to the IDE.
 The rationale behind opting for this approach instead of native IDE integration is discussed in \autoref{sec:lessonsLearned}.
-In addition, the next section discusses recent improvements to the visual debugger, which led to a better IDE integration despite a web-based UI.
+In addition, the next section discusses recent improvements to the visual debugger, which led to a better IDE integration despite a web-based user interface.
 
 % Improvements would be better loading
 \subsection{Improvements \& New Features} \label{subsec:improvements}
@@ -221,7 +221,7 @@ As a result, users now have the option to use the embedded instead of an externa
 Most of the functionality of our visualization component worked out of the box with the JCEF browser.
 Additionally, nearly all other features, for example, exporting object diagrams to XML/SVG, were successfully implemented using JCEF APIs.
 
-The Chromium Embedded Framework (CEF)\footnote{\url{https://github.com/chromiumembedded/cef}} is integrated with numerous programming languages, including the Java integration JCEF.
+The Chromium Embedded Framework (CEF) \cite{marshallgreenblattChromiumEmbeddedFramework2023} is integrated with numerous programming languages, including the Java integration JCEF.
 The CEF plays a crucial role in many popular applications, for example, the cross-platform Steam Client\footnote{\url{https://developer.valvesoftware.com/wiki/Chromium_Embedded_Framework}}.
 However, integrating web applications into \intellij{} is not entirely seamless, which is also highlighted by the fact that using JCEF is still an experimental feature in \intellij{}.
 Consequently, we give each user the choice to use the embedded or external browser.
@@ -263,18 +263,38 @@ In addition, one can still export the debug information to an image or even edit
 % Implementation
 We implemented the \textit{debug history} in the visualization component to be independent of the used programming language and IDE.
 Thus, both features follow our aim of providing a reusable visualization of the debugging information set in our previous publication \cite{krauterVisualDebuggerTool2022}.
-% Smarter UI?. Shows if more information is available (colors and icons). --> Colors and overlays can be adapted from BPMN-js
 
 \section{Lessons Learned \& Roadblocks} \label{sec:lessonsLearned}
-The first lesson we learned is that more features are available during plugin development than are documented.
+The most important lesson we learned is that there are more features available during plugin development than what is documented.
 Thus, after a thorough search in the documentation, it is beneficial to ask a question in the community forum for plugin development.
 If one asks precise, detailed questions, one receives helpful answers quickly, making the forum an immensely valuable resource.
 For example, our new deferred loading of debug information discussed in \autoref{subsec:improvements} was enabled due to the \intellij{} forum.
-The forum provides the rare opportunity to interact directly with \intellij{} developers.
+The forum provides the rare opportunity to interact directly with JetBrains developers.
+
+While developing the visual debugger plugin, we encountered two significant roadblocks.
+In the remaining portion of this section, we will describe these roadblocks and how to overcome them in the future.
 
 % Roadblock 1: IDE integration due to IDE UI technology --> See notes --> JCEF
+\textbf{Roadblock (1):} Creating a user interface with interactive diagramming capabilities and integrating it into \intellij{} was challenging for different reasons.
+The IntelliJ Platform is built on Java, and plugin user interfaces utilize the Swing framework.
+However, we could not find a diagramming framework for Swing to implement an interactive object diagram for our visualization component.
+\intellij{} uses \textit{yFiles}\footnote{\url{https://www.yworks.com/products/yfiles}}, for example, to visualize generated class diagrams from source code.
+For us \textit{yFiles} was not an option because the cheapest license already carries a significant cost\footnote{A single license for a single developer and application currently costs 10,000 USD.} and we do not plan to monetize our plugin.
+
+Thus, we started with an embedded visualizer using PlantUML \cite{arnaudroquesPlantUML2023} to generate pictures of object diagrams.
+Finally, to allow interactions with object diagrams, we opted for the free and open-source \textit{diagram-js} library to implement our web-based library \textit{object-diagram-js} \cite{timkrauterObjectdiagramjs2023} used in the visual debugger.
+To summarize, the rich web ecosystem and its growing popularity among developers has led us to a web-based visualization.
+Integrating a web-based user interface into \intellij{} is not obvious compared to other IDEs, such as Visual Studio Code, which is built on web technologies and heavily uses web views for extensions.
+
+To integrate our web-based user interface into \intellij{}, we now use JCEF as described in \autoref{subsec:improvements}.
+We were unaware of this possibility for an extended period.
+We believe the plugin documentation regarding JCEF and web views has room for improvement to take full advantage of the rich web ecosystem.
+First, it should be more visible that the integration of web views is possible.
+Second, the integration poses challenges that can be reduced by more extensive documentation about JCEF.
+Currently, we are authoring a pull request to improve the plugin documentation, incorporating insights gained from our experience with the visual debugger. % TODO: Do this.
 
 % Roadblock 2: Missing APIs for less popular IDEs.
+\textbf{Roadblock (2):} Other IDEs which are less popular than \intellij{} are missing debugging-related APIs to implement our plugin.
 Users of the visual debugger have asked us if the plugin could be adapted to work with other IDEs and programming languages.
 For example, we would like to support debugging \textit{Go} applications inside the GoLand IDE.
 However, compared to \intellij{} plugins, there is no API to hook into debugging processes in GoLand.

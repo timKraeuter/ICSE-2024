@@ -1,8 +1,10 @@
 # ICSE-2024
 
 This repository contains the sources of [a paper](./paper.pdf) submitted to the IDE Workshop at the [46th International Conference on Software Engineering (ICSE 2024)](https://conf.researchr.org/home/icse-2024) and associated artifacts.
+
 The paper describes our experience and lessons learned from implementing the [open-source](https://github.com/timKraeuter/VisualDebugger) [Visual Debugger](https://plugins.jetbrains.com/plugin/16851-visual-debugger).
-We also highlight _new features_ in the Visual Debugger compared to our [previous publication at ICMSE-2022](https://doi.org/10.1109/ICSME55016.2022.00066).
+
+We also describe _improvements and new features_ in the Visual Debugger compared to our [previous publication at ICMSE-2022](https://doi.org/10.1109/ICSME55016.2022.00066).
 
 # Demonstration of the Visual Debugger
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/lU_OgotweRk/0.jpg)](https://www.youtube.com/watch?v=lU_OgotweRk)

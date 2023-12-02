@@ -115,15 +115,16 @@
 
 \section{Introduction}
 This paper details the experience of implementing, maintaining, and improving the \textit{visual debugger} \cite{krauterVisualDebuggerTool2022}.
-The visual debugger is available for \intellij{} and Android studio as a plugin \cite{timkrauterVisualDebuggerIntelliJ2023}, but its architecture makes it easily adaptable to other Integrated Development Environments (IDEs) \cite{krauterVisualDebuggerTool2022}.
-% Briefly say what the plugin does
+The visual debugger is available for \intellij{} and Android studio as a plugin \cite{timkrauterVisualDebuggerIntelliJ2023}, but its architecture makes it easily adaptable to other Integrated Development Environments (IDEs).
+The visual debugger automatically hooks into the IDE's debugging process and graphically depicts the current debug information as an \textit{object diagram} to foster program comprehension \cite{krauterVisualDebuggerTool2022}.
 
 The contributions of this paper are twofold:
-(1) % Showcase the new features and improvements
-(2) % Lessons learned and roadblocks for IDE developers
 
-% Roadblocks hampering full IDE integration: Swing, Tradeoff tight integration and reusability
-% Implementing more IDEs and standard debugging protocols
+\textbf{(1)} We describe the improvements and new features added to the visual debugger since our last publication \cite{krauterVisualDebuggerTool2022}, see \autoref{subsec:improvements}.
+Especially how we improved the integration of our plugin into \intellij{}.
+
+\textbf{(2)} We discuss the lessons learned and roadblocks we experienced while developing the visual debugger as a plugin for \intellij{}.
+In addition, we propose methods to mitigate these roadblocks to achieve smoother and easier IDE integration in the future. 
 
 % Paper outline
 The remainder of this paper is structured as follows.
@@ -131,8 +132,8 @@ We describe the visual debugger in (\cref{sec:visualDebugger}), including its ar
 Then, we outline the lessons learned and roadblocks we encountered during development in \cref{sec:lessonsLearned} and how to possibly overcome them.
 Finally, we conclude in \cref{sec:conclusion}.
 
-
 \section{The visual debugger} \label{sec:visualDebugger}
+
 % What can the tool do?
 The visual debugger is an open-source \intellij{} plugin that visualizes the debugging variables as an object diagram to foster program comprehension.
 It is available for \intellij{} and Android Studio through the JetBrains Marketplace \cite{timkrauterVisualDebuggerIntelliJ2023, timkrauterVisualDebuggerTool2023} making use of the IntelliJ Platform \cite{kurbatovaIntelliJPlatformFramework2021}.
@@ -143,7 +144,7 @@ Debugging information might not be present in the top-level variables and has to
 Thus, in specific scenarios, especially when data is hierarchically structured, a graphical representation results in a faster and better understanding of the debugging information \cite{krauterVisualDebuggerTool2022}.
 
 % Feedback for the tool and current vs previous downloads.
-Until now, we have only received positive feedback regarding the visual debugger, which now has over 7200 downloads\footnote{Last checked on the 28th of November, 2023, see \cite{timkrauterVisualDebuggerIntelliJ2023}.}.
+Until now, we have only received positive feedback regarding the visual debugger, which now has over 7360 downloads\footnote{Last checked on the 2nd of December, 2023, see \cite{timkrauterVisualDebuggerIntelliJ2023}.}.
 This marks a twofold increase in downloads compared to the initial release of our research paper \cite{krauterVisualDebuggerTool2022} on July 21, 2022, which garnered approximately 2700 downloads.
 
 Additional artifacts, including source code, a demonstration of the visual debugger tool, and a description of the Visual Debugging API, can be found in \cite{timkrauterICSE2024Artifacts2023}.
@@ -154,7 +155,7 @@ Traditionally, debugging information is represented textually, such as in \autor
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.4\textwidth]{images/variables.png}
+    \includegraphics[width=0.475\textwidth]{images/variables.png}
     \caption{Variables during debugging in \intellij}
     \label{fig:variablesIntellij}
 \end{figure}
@@ -187,15 +188,14 @@ More information about the visual debugger, including a typical usage scenario, 
 In addition, a demonstration of the visual debugger is available at \url{https://www.youtube.com/watch?v=lU_OgotweRk}, and the tool can be installed using \cite{timkrauterVisualDebuggerIntelliJ2023}.
 
 \subsection{Architecture}
-% Structure into two components --> Important for new features and roadblocks later.
-In this section, we briefly recap the architecture of the visual debugger.
-% The architecture plays an important role in the new features of the visual debugger and helps us understand the roadblocks we have encountered during development.
+In this section, we briefly summarize the architecture of the visual debugger.
+The plugin's architecture plays an important role in the improvements and new features of the visual debugger, as well as in understanding the roadblocks we discuss in \autoref{sec:lessonsLearned}.
 The visual debugger is separated into two independent components communicating through the \textit{Visual Debugging API} \cite{krauterVisualDebuggerTool2022}.
 \autoref{fig:architecture} summarizes the architecture of the visual debugger.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.7\linewidth]{images/visual-debugger-architecture.pdf}
+  \includegraphics[width=0.65\linewidth]{images/visual-debugger-architecture.pdf}
   \caption{Visual debugger architecture}
   \label{fig:architecture}
 \end{figure}
@@ -329,7 +329,7 @@ As a result, the visual debugger becomes compatible with any combination of IDE 
 For example, the visual debugger could be automatically available for more JetBrains IDEs, such as GoLand (Go), RustRover (Rust), Rider (C\#), and more.
 
 After the success of the LSP, it seems like the DAP is on track to become the next standardized development tool functionality \cite{raskVisualStudioCode2020,borkLanguageServerProtocol2023}.
-The official page of the DAP lists 11 tools supporting the DAP, 67 debug adapters, and 11 DAP SDKs as of December 2024 \cite{microsoftDebugAdapterProtocol2023}, including, for example, a Go DAP implementation maintained by Google\footnote{\url{https://github.com/google/go-dap}}.
+The official page of the DAP lists 11 tools supporting the DAP, 67 debug adapters, and 11 DAP SDKs as of December 2024 \cite{microsoftDebugAdapterProtocol2023}, including, for example, a Go DAP implementation maintained by Google \cite{googleGoImplementationDebug2023}.
 Research is also conducted on the DAP to debug Domain-Specific Languages \cite{jeanjeanIDECodeReifying2021,enetProtocolBasedInteractiveDebugging2023}.
 
 \section{Conclusion \& Future work} \label{sec:conclusion}

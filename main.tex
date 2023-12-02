@@ -135,7 +135,7 @@ Finally, we conclude in \cref{sec:conclusion}.
 \section{The visual debugger} \label{sec:visualDebugger}
 
 % What can the tool do?
-The visual debugger is an open-source \intellij{} plugin that visualizes the debugging variables as an object diagram to foster program comprehension.
+The visual debugger is an open-source \intellij{} plugin that visualizes the debugging variables as an object diagram to improve program comprehension.
 It is available for \intellij{} and Android Studio through the JetBrains Marketplace \cite{timkrauterVisualDebuggerIntelliJ2023, timkrauterVisualDebuggerTool2023} making use of the IntelliJ Platform \cite{kurbatovaIntelliJPlatformFramework2021}.
 Our plugin was integrated into \intellij{}, the Java IDE with the highest popularity, with approximately 70\% market share as per the JVM Ecosystem Report 2021 \cite{brianvermeerJVMEcosystemReport2021}.
 
@@ -144,8 +144,8 @@ Debugging information might not be present in the top-level variables and has to
 Thus, in specific scenarios, especially when data is hierarchically structured, a graphical representation results in a faster and better understanding of the debugging information \cite{krauterVisualDebuggerTool2022}.
 
 % Feedback for the tool and current vs previous downloads.
-Until now, we have only received positive feedback regarding the visual debugger, which now has over 7360 downloads\footnote{Last checked on the 2nd of December, 2023, see \cite{timkrauterVisualDebuggerIntelliJ2023}.}.
-This marks a twofold increase in downloads compared to the initial release of our research paper \cite{krauterVisualDebuggerTool2022} on July 21, 2022, which garnered approximately 2700 downloads.
+Until now, we have only received positive feedback regarding the visual debugger, which now has over 7300 downloads\footnote{Last checked on the 2nd of December, 2023, see \cite{timkrauterVisualDebuggerIntelliJ2023}.}.
+This marks a more than twofold increase in downloads compared to the initial release of our research paper \cite{krauterVisualDebuggerTool2022} on July 21, 2022, which garnered approximately 2700 downloads.
 
 Additional artifacts, including source code, a demonstration of the visual debugger tool, and a description of the Visual Debugging API, can be found in \cite{timkrauterICSE2024Artifacts2023}.
 
@@ -200,9 +200,9 @@ The visual debugger is separated into two independent components communicating t
   \label{fig:architecture}
 \end{figure}
 
-The first component, the \textit{debugging component} integrates with \intellij{}, and its primary function is to acquire and refresh debugging information throughout the debugging process.
+The first component, the \textit{debugging component}, integrates with \intellij{}, and its primary function is to acquire and refresh debugging information throughout the debugging process.
 The debugging component makes this information available via a WebSocket server that implements our Visual Debugging API.
-Upon establishing a connection to the Visual Debugging API, a client receives real-time updates with the latest debugging data and can request to load children for an existing object.
+Upon establishing a connection to the Visual Debugging API, a client receives real-time updates with the latest debugging information and can request to load children for an existing object.
 
 The second component, the \textit{visualization component}, portrays debugging information as an object diagram for better understanding (refer to \autoref{fig:variablesVisualDebugger} for an illustration).
 It is implemented using web technologies and our object diagram library \cite{timkrauterObjectdiagramjs2023} to visualize the debug information.
@@ -334,17 +334,29 @@ Research is also conducted on the DAP to debug Domain-Specific Languages \cite{j
 
 \section{Conclusion \& Future work} \label{sec:conclusion}
 % Conclusion
+The visual debugger has increased in popularity, measured by the more than doubling of downloads of the plugin compared to our previous publication \cite{krauterVisualDebuggerTool2022}.
+In this work, we make two contributions related to the visual debugger and the broader topic of IDE integration.
 
-% Summarize stats of the plugin --> Interest in other languages such as GoLang
-% Summarize new features
-% Summarize roadblocks and lessons learned
+% Summarize improvements and new features
+Our first contribution is represented by the improvements and new features we incorporated into the visual debugger.
+We have integrated our visual debugger more smoothly into the IDE by employing an embedded browser based on the Java Chromium Embedded Framework (JCEF) and improved the performance of loading debugging information.
+Furthermore, the visual debugger now highlights changes graphically using colors and overlays, and we implemented a debug history.
+
+% Summarize roadblocks and their solutions
+Our second contribution is detailing the experience gained by implementing the visual debugger.
+We described two major roadblocks hampering tighter IDE integration of our plugin.
+First, integrating web-based user interfaces that use the extensive and popular web ecosystem is not trivial.
+Using the JCEF makes this integration possible, but its visibility and documentation should be improved.
+Second, not all IDEs offer debugging-related APIs such that we could integrate our plugin.
+To make debugging functionality uniformly accessible for plugin development, we propose to utilize the standardized Debug Adapter Protocol (DAP).
 
 % Future work
-Implement for other IDEs and code editors such as Eclipse \cite{desrivieresEclipsePlatformIntegrating2004} and Visual Studio Code.
+In future work, we aim to adapt the visual debugger for other IDEs and code editors such as GoLang, Eclipse \cite{desrivieresEclipsePlatformIntegrating2004}, and Visual Studio Code since this has been requested by our users.
+We aim to implement the DAP to minimize the integration effort and development cost for the different IDEs.
 
-% This summary could lead to the following empirical studies:
-% 1. Empirical study about the usability of the tool
-% 2. Does the visual debugger boost productivity in certain scenarios? Which scenarios? If yes, how much is the productivity boosted?
+Furthermore, it would be interesting to study the usability of the visual debugger and its impact on program comprehension.
+It seems interesting to find out in which scenarios visual debugging is more effective than textual debugging and vice versa.
+Since the visual debugger is \textit{not} meant to replace the textual debugger, one should also include a combination of both textual and visual debugging in an empirical study.
 
 % Add acknowledgments after review
 % \section{Acknowledgments}

@@ -23,10 +23,6 @@
 
 \acmConference[ICSE 2024]{46th International Conference on Software Engineering}{April 2024}{Lisbon, Portugal}
 
-% My packages
-\usepackage[nameinlink]{cleveref} % Reference footnotes.
-% My packages end
-
 %%
 %% end of the preamble, the start of the body of the document source.
 \begin{document}
@@ -35,10 +31,6 @@
 %% The "title" command has an optional parameter,
 %% allowing the author to define a "short title" in page headers.
 \title{Implementing the Visual Debugger: Past, Present, and Future}
-% Alternative titles
-% Implementing the visual debugger: Past, Present, and Future
-% Implementing the visual debugger: Past, An experience report
-% Something regarding IDE integration?
 
 \author{Tim Kr\"{a}uter}
 \email{tkra@hvl.no}
@@ -67,19 +59,6 @@
   \country{Norway}
 }
 
-% \author{Harald K\"{o}nig}
-% \email{harald.koenig@fhdw.de}
-% \orcid{0000-0001-6304-6311}
-% \affiliation{
-%   \institution{University of Applied Sciences, FHDW}
-%   \city{Hannover}
-%   \country{Germany}}
-% \affiliation{
-%   \institution{Western Norway University of Applied Sciences}
-%   \city{Bergen}
-%   \country{Norway}
-% }
-
 \author{Yngve Lamo}
 \email{yla@hvl.no}
 \orcid{0000-0001-9196-1779}
@@ -90,12 +69,9 @@
 }
 
 \renewcommand{\shortauthors}{Kräuter et al.}
-\newcommand{\intellij}{IntelliJ IDEA} % <-- Space has to be there
+\newcommand{\intellij}{IntelliJ IDEA}
 % Four pages + 1 page of references.
 
-%%
-%% The abstract is a short summary of the work to be presented in the
-%% article.
 \begin{abstract}
   TODO: Abstract.
 \end{abstract}
@@ -128,9 +104,9 @@ In addition, we propose methods to mitigate these roadblocks to achieve smoother
 
 % Paper outline
 The remainder of this paper is structured as follows.
-We describe the visual debugger in (\cref{sec:visualDebugger}), including its architecture and the improvements and new features we have implemented recently.
-Then, we outline the lessons learned and roadblocks we encountered during development in \cref{sec:lessonsLearned} and how to possibly overcome them.
-Finally, we conclude in \cref{sec:conclusion}.
+We describe the visual debugger in (\autoref{sec:visualDebugger}), including its architecture and the improvements and new features we have implemented recently.
+Then, we outline the lessons learned and roadblocks we encountered during development in \autoref{sec:lessonsLearned} and how to possibly overcome them.
+Finally, we conclude in \autoref{sec:conclusion}.
 
 \section{The visual debugger} \label{sec:visualDebugger}
 
@@ -170,7 +146,7 @@ In addition, the coloring in \autoref{fig:variablesVisualDebugger} highlights va
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.475\textwidth]{images/variables-visual-debugger.png}
-    \caption{Visual debugger visualization comparable to \cref{fig:variablesIntellij}}
+    \caption{Object diagram of \autoref{fig:variablesIntellij} in the visual debugger}
     \label{fig:variablesVisualDebugger}
 \end{figure}
 

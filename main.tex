@@ -190,7 +190,7 @@ The visual debugger is separated into two independent components communicating t
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.65\linewidth]{images/visual-debugger-architecture.pdf}
+  \includegraphics[width=0.6\linewidth]{images/visual-debugger-architecture.pdf}
   \caption{Visual debugger architecture}
   \label{fig:architecture}
 \end{figure}
@@ -263,7 +263,7 @@ We implemented the \textit{debug history} in the visualization component to be i
 Thus, both features follow our aim of providing a reusable visualization of the debugging information set in our previous publication \cite{krauterVisualDebuggerTool2022}.
 
 \section{Lessons Learned \& Roadblocks} \label{sec:lessonsLearned}
-The most important lesson we learned is that there are more features available during plugin development than what is documented.
+The most important lesson we learned is that more features are available during plugin development than what is documented.
 Thus, after a thorough search in the documentation, it is beneficial to ask a question in the community forum for plugin development.
 If one asks precise, detailed questions, one receives helpful answers quickly, making the forum an immensely valuable resource.
 For example, our new deferred loading of debug information discussed in \autoref{subsec:improvements} was enabled due to the \intellij{} forum.
@@ -276,12 +276,12 @@ In the remaining portion of this section, we will describe these roadblocks and 
 \textbf{Roadblock (1):} Creating a user interface with interactive diagramming capabilities and integrating it into \intellij{} was challenging for different reasons.
 The IntelliJ Platform is built on Java, and plugin user interfaces utilize the Swing framework.
 However, we could not find a diagramming framework for Swing to implement an interactive object diagram for our visualization component.
-\intellij{} uses \textit{yFiles}\footnote{\url{https://www.yworks.com/products/yfiles}}, for example, to visualize generated class diagrams from source code.
-For us \textit{yFiles} was not an option because the cheapest license already carries a significant cost\footnote{A single license for a single developer and application currently costs 10,000 USD.} and we do not plan to monetize our plugin.
+\intellij{} uses \textit{yFiles} \cite{yworksYFilesDiagrammingLibrary2023}, for example, to visualize generated class diagrams from source code.
+For us, \textit{yFiles} was not an option because the cheapest license already carries a significant cost, and we do not plan to monetize our plugin.
 
 Thus, we started with an embedded visualizer using PlantUML \cite{arnaudroquesPlantUML2023} to generate pictures of object diagrams.
 Finally, to allow interactions with object diagrams, we opted for the free and open-source \textit{diagram-js} library to implement our web-based library \textit{object-diagram-js} \cite{timkrauterObjectdiagramjs2023} used in the visual debugger.
-To summarize, the rich web ecosystem and its growing popularity among developers has led us to a web-based visualization.
+To summarize, the rich web ecosystem and its growing popularity among developers have led us to a web-based visualization.
 Integrating a web-based user interface into \intellij{} is not obvious compared to other IDEs, such as Visual Studio Code, which is built on web technologies and heavily uses web views for extensions.
 
 To integrate our web-based user interface into \intellij{}, we now use JCEF as described in \autoref{subsec:improvements}.
@@ -309,7 +309,7 @@ Since not all current debuggers will adopt this protocol, an intermediary compon
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=1\linewidth]{images/visual-debugger-DAP-architecture.pdf}
+  \includegraphics[width=0.9\linewidth]{images/visual-debugger-DAP-architecture.pdf}
   \caption{Debug Adapter Protocol Architecture \cite{microsoftDebugAdapterProtocol2023}}
   \label{fig:DAP_Architecture}
 \end{figure}

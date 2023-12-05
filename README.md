@@ -25,5 +25,5 @@ The Visual Debugging API is described [here](https://github.com/timKraeuter/Visu
 - More information about the Visual Debugger, including screenshots, can be found on the [its plugin page](https://plugins.jetbrains.com/plugin/16851-visual-debugger) in the IntelliJ IDEA marketplace.
 - The **visualization component** of the Visual Debugger can be found [here](https://github.com/timKraeuter/object-diagram-js).
 - You can edit object diagrams created during debugging using my [object diagram modeler](https://timkraeuter.com/object-diagram-js/).
-- A short documentation of the visual debugger implementation can be found [here](https://github.com/timKraeuter/VisualDebugger/blob/master/documentation/README.md).
+- A short documentation of the Visual Debugger implementation can be found [here](https://github.com/timKraeuter/VisualDebugger/blob/master/documentation/README.md).
 - There is also a description of the Visual Debugger on [my website](https://timkraeuter.com//visual-debugger/).

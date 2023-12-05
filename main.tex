@@ -148,26 +148,25 @@ Additional artifacts, including source code, a demonstration of the visual debug
 
 \subsection{Description}
 
-Traditionally, stack frame variables are represented textually, such as in \autoref{fig:variablesIntellij}, which is a screenshot of the variables view in \intellij.
+Traditionally, stack frame variables are represented textually, such as in \autoref{fig:variablesIntellij}, a screenshot of the variables view in \intellij{} for a Binary Search Tree (BST).
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.475\textwidth]{images/variables.png}
-    \caption{Variables during debugging in \intellij}
+    \includegraphics[width=0.2\textwidth]{images/variables.png}
+    \caption{BST in the variables view of \intellij}
     \label{fig:variablesIntellij}
 \end{figure}
 
-The visual debugger will represent the same information graphically as an object diagram.
+The visual debugger represents the same information graphically as an object diagram.
 Using the visual debugger is \textit{straightforward} since it opens automatically during debugging in the IDE.
 The visual debugger visualizes the variables in the scope of the debugging session (see, for example, \autoref{fig:variablesVisualDebugger}) and, stepping through the source code, updates this representation.
 \autoref{fig:variablesVisualDebugger} contains the same objects and level of detail as \autoref{fig:variablesIntellij}.
-There is a little more debug information in \autoref{fig:variablesIntellij} due to well-written \textsf{toString()} methods which are used by \intellij{}.
-In addition, the coloring in \autoref{fig:variablesVisualDebugger} highlights variable changes and additions, a new feature of the visual debugger discussed in \autoref{subsec:improvements}.
+However, the coloring in \autoref{fig:variablesVisualDebugger} highlights variable changes and additions, a new feature of the visual debugger discussed in \autoref{subsec:improvements}.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.475\textwidth]{images/variables-visual-debugger.png}
-    \caption{Object diagram of \autoref{fig:variablesIntellij} in the visual debugger}
+    \includegraphics[width=0.25\textwidth]{images/variables-visual-debugger.png}
+    \caption{BST as an object diagram using the visual debugger}
     \label{fig:variablesVisualDebugger}
 \end{figure}
 
@@ -180,7 +179,7 @@ For example, in \autoref{fig:variablesVisualDebugger}, all objects the green obj
 The goal is to make the visual debugger \textit{familiar} by adopting how textual debuggers work such that a transition is smooth.
 
 More information about the visual debugger, including a typical usage scenario, can be found in \cite{krauterVisualDebuggerTool2022}.
-In addition, a new demonstration of the visual debugger is available at \url{https://www.youtube.com/watch?v=LsAMTnLxWJw}, and the tool can be installed using \cite{timkrauterVisualDebuggerIntelliJ2023}.
+In addition, a new video demonstration of the visual debugger is available at \url{https://www.youtube.com/watch?v=LsAMTnLxWJw}, showcasing the improvements discussed in \autoref{subsec:improvements}.
 
 \subsection{Architecture}
 In this section, we briefly summarize the architecture of the visual debugger.
@@ -260,7 +259,11 @@ In addition, one can still export the debug information to an image or even edit
 
 % Implementation
 We implemented the \textit{debug history} in the visualization component to be independent of the used programming language and IDE.
-Thus, both features follow our aim of providing a reusable visualization of the stack frame variables set in our previous publication \cite{krauterVisualDebuggerTool2022}.
+Thus, both features follow our aim of providing a reusable visualization of the stack frame variables set in our previous publication~\cite{krauterVisualDebuggerTool2022}.
+
+
+
+
 
 \section{Lessons Learned \& Roadblocks} \label{sec:lessonsLearned}
 The most important lesson we learned is that more features are available during plugin development than what is documented.

@@ -9,11 +9,11 @@ We also describe _improvements and new features_ in the Visual Debugger compared
 # Demonstration of the Visual Debugger
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/LsAMTnLxWJw/0.jpg)](https://www.youtube.com/watch?v=LsAMTnLxWJw)
 
-Follow the [demonstration](https://www.youtube.com/watch?v=lU_OgotweRk) doing the following steps:
+Follow the [demonstration](https://www.youtube.com/watch?v=LsAMTnLxWJw) doing the following steps:
 1. Clone the Visual Debugger [repository](https://github.com/timKraeuter/VisualDebugger) using git.
 2. Open the repository clone using IntelliJ IDEA as a new project.
 3. Install the Visual Debugger plugin from the IntelliJ IDEA marketplace (```File < Settings < Plugins``` and search for **Visual Debugger**).
-4. Go to the class ```PartsListTest``` and set a breakpoint at line 14 (directory: ```src/test/java```, package: ```no.hvl.tk.visual.debugger.manueltests.partsList```).
+4. Go to the class ```BSTNodeTest``` and set a breakpoint at line 10 (directory: ```src/test/java```, package: ```no.hvl.tk.visual.debugger.manueltests.bst```).
 5. Start debugging and activate the Visual Debugger in the Visual Debugger window.
 6. Open the Visual Debugger by clicking on the "Launch browser" or "Launch embedded browser" button in the Visual Debugger window.
 7. Enjoy the Visual Debugger.

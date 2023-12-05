@@ -7,7 +7,7 @@ The paper describes our experience and lessons learned from implementing the [op
 We also describe _improvements and new features_ in the Visual Debugger compared to our [previous publication at ICMSE-2022](https://doi.org/10.1109/ICSME55016.2022.00066).
 
 # Demonstration of the Visual Debugger
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/lU_OgotweRk/0.jpg)](https://www.youtube.com/watch?v=LsAMTnLxWJw)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/LsAMTnLxWJw/0.jpg)](https://www.youtube.com/watch?v=LsAMTnLxWJw)
 
 Follow the [demonstration](https://www.youtube.com/watch?v=lU_OgotweRk) doing the following steps:
 1. Clone the Visual Debugger [repository](https://github.com/timKraeuter/VisualDebugger) using git.

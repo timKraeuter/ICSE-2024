@@ -6,7 +6,7 @@ The paper describes our experience and lessons learned from implementing the [op
 
 We also describe _improvements and new features_ in the Visual Debugger compared to our [previous publication at ICMSE-2022](https://doi.org/10.1109/ICSME55016.2022.00066).
 
-# Demonstration of the Visual Debugger
+# Demonstration of the Visual Debugger 2.0
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/LsAMTnLxWJw/0.jpg)](https://www.youtube.com/watch?v=LsAMTnLxWJw)
 
 Follow the [demonstration](https://www.youtube.com/watch?v=LsAMTnLxWJw) doing the following steps:

@@ -77,8 +77,8 @@
     The Visual Debugger is an IntelliJ IDEA plugin that presents debug information as an object diagram for improved program understanding.
     % Past: Lessons learned and roadblocks + experience
     Reflecting on our \textit{past} development, we detail the lessons learned and roadblocks we have experienced while implementing and integrating the Visual Debugger into the IntelliJ IDEA.
-    % Present: New features and improvements
-    Furthermore, we describe recent improvements and new features added to the Visual Debugger, greatly improving the plugin in the \textit{present}.
+    % Present: Improvements
+    Furthermore, we describe recent improvements to the Visual Debugger, greatly enhancing the plugin in the \textit{present}.
     % Future: possible solutions to the roadblocks and future work
     Looking into the \textit{future}, we propose solutions to overcome the roadblocks encountered while developing the plugin and further plans for the Visual Debugger.
 \end{abstract}
@@ -117,7 +117,7 @@ The Visual Debugger automatically hooks into the IDE's debugging process and gra
 
 The contributions of this paper are twofold:
 
-\textbf{(1)} We describe the improvements and new features added to the Visual Debugger since our last publication \cite{krauterVisualDebuggerTool2022}, see \autoref{sec:visualDebugger}.
+\textbf{(1)} We describe the improvements made to the Visual Debugger since our last publication \cite{krauterVisualDebuggerTool2022}, see \autoref{sec:visualDebugger}.
 In particular, we detail how we improved the integration of our plugin into \intellij{}.
 
 \textbf{(2)} We discuss the lessons learned and roadblocks we experienced while developing the Visual Debugger as a plugin for \intellij{}, see \autoref{sec:lessonsLearned}.
@@ -142,34 +142,27 @@ Additional artifacts, including source code, a demonstration of the Visual Debug
 
 \subsection{Description}
 
-Traditionally, stack frame variables are represented textually, such as in \autoref{fig:variablesIntellij}, a screenshot of the variables view in \intellij{} for a Binary Search Tree (BST).
+Traditionally, stack frame variables are represented textually, such as in \autoref{fig:variables} (a), a screenshot of the variables view in \intellij{} for a Binary Search Tree (BST).
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.2\textwidth]{images/variables.png}
-    \caption{BST in the variables view of \intellij}
-    \label{fig:variablesIntellij}
+    \includegraphics[width=0.475\textwidth]{images/visual-debugger-variables.pdf}
+    \caption{Binary Search Tree (BST) during debugging}
+    \label{fig:variables}
 \end{figure}
 
 The Visual Debugger represents the same information graphically as an object diagram.
 Using the Visual Debugger is \textit{straightforward} since it opens automatically during debugging in the IDE.
-The Visual Debugger visualizes the variables in the scope of the debugging session (see, for example, \autoref{fig:variablesVisualDebugger}) and, stepping through the source code, updates this representation.
-\autoref{fig:variablesVisualDebugger} contains the same objects and level of detail as \autoref{fig:variablesIntellij}.
-However, the coloring in \autoref{fig:variablesVisualDebugger} highlights variable changes and additions, a new feature of the Visual Debugger discussed in \autoref{subsec:improvements}.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.25\textwidth]{images/variables-visual-debugger.png}
-    \caption{BST as an object diagram using the Visual Debugger}
-    \label{fig:variablesVisualDebugger}
-\end{figure}
+The Visual Debugger visualizes the variables in the scope of the debugging session (see, for example, \autoref{fig:variables} (b)) and, stepping through the source code, updates this representation.
+\autoref{fig:variables} (a) and (b) contain the same objects and level of detail, despite \textit{null values} being ignored in the Visual Debugger.
+However, the coloring in \autoref{fig:variables} highlights changes and additions, a new feature of the Visual Debugger discussed in \autoref{subsec:improvements}.
 
 The graphical visualization does not replace the textual debugging view but aims to improve program comprehension during debugging~\cite{krauterVisualDebuggerTool2022}.
 Concretely, the Visual Debugger is \textit{non-intrusive} since it can be used alongside the traditional textual debugging available in the IDE.
 
-The Visual Debugger automatically updates the debug information just as the \intellij{} debugger whenever a user steps through the source code or reaches a new breakpoint.
+The Visual Debugger automatically updates the debug information as the \intellij{} debugger whenever a user steps through the source code or reaches a new breakpoint.
 Moreover, the objects a debugging variable refers to can be loaded by double-clicking an object in the object diagram, similar to how it works in most textual debuggers.
-For example, in \autoref{fig:variablesVisualDebugger}, all objects the green object refers to were loaded.
+For example, in \autoref{fig:variables}, all objects the green object refers to were loaded.
 The goal is to make the Visual Debugger \textit{familiar} by adopting how textual debuggers work such that a transition is smooth.
 
 More information about the Visual Debugger, including a typical usage scenario, can be found in \cite{krauterVisualDebuggerTool2022}.
@@ -177,7 +170,7 @@ In addition, a new video demonstration of the Visual Debugger is available at \u
 
 \subsection{Architecture}
 In this section, we briefly summarize the architecture of the Visual Debugger.
-The plugin's architecture plays an important role in the improvements and new features of the Visual Debugger, as well as in understanding the roadblocks we discuss in \autoref{sec:lessonsLearned}.
+The plugin's architecture plays an important role in understanding the improvements to the Visual Debugger and the roadblocks we discuss in \autoref{sec:lessonsLearned}.
 The Visual Debugger is separated into two independent components communicating through the \textit{Visual Debugging API} \cite{krauterVisualDebuggerTool2022}.
 \autoref{fig:architecture} summarizes the architecture of the Visual Debugger.
 
@@ -192,7 +185,7 @@ The first component, the \textit{debugging component}, integrates with \intellij
 The debugging component makes this information available via a WebSocket server that implements our Visual Debugging API.
 Upon establishing a connection to the Visual Debugging API, a client receives real-time updates with the latest debugging information and can request to load referenced objects for an existing object.
 
-The second component, the \textit{visualization component}, portrays stack frame variables as an object diagram for better understanding (refer to \autoref{fig:variablesVisualDebugger} for an illustration).
+The second component, the \textit{visualization component}, portrays stack frame variables as an object diagram for better understanding (refer to \autoref{fig:variables} for an illustration).
 It is implemented using web technologies and our object diagram library \cite{timkrauterObjectdiagramjs2023} to visualize the debug information.
 Additionally, it leverages the Visual Debugging API to communicate with the debugging component.
 Thus, it is agnostic of the IDE used for debugging and can even be reused for other programming languages than Java/Kotlin.
@@ -203,7 +196,7 @@ The rationale behind opting for this approach instead of native IDE integration 
 In addition, the next section discusses recent improvements to the Visual Debugger, which led to a better IDE integration despite a web-based user interface.
 
 % Improvements would be better loading
-\subsection{Improvements \& New Features} \label{subsec:improvements}
+\subsection{Improvements} \label{subsec:improvements}
 We made two major improvements to the Visual Debugger, optimizing its integration with the IDE and expanding its applicability to more complex debugging scenarios.
 
 \textbf{Improvement (1):} We integrated an embedded browser into the Visual Debugger panel inside \intellij{}.
@@ -232,7 +225,7 @@ Furthermore, we enhanced the Visual Debugger by introducing the following two ne
 \textbf{Feature (1):} The visualization component of the Visual Debugger now \textit{highlights changes} using colors and overlays in the object diagram.
 New objects and links are colored green, while changes to existing elements lead to orange coloring.
 Computing and highlighting the changes is enabled by default but can be switched off.
-\autoref{fig:variablesVisualDebugger} shows the new change visualization by highlighting three changed, and one added object accordingly.
+\autoref{fig:variables} shows the new change visualization by highlighting one changed and added object accordingly.
 % Motivation
 A software engineer is usually most interested in the changes that occur to the objects during debugging.
 Our color-based visualization of changes in the object diagram makes it easier for a software engineer to see changes even when dealing with a complex debugging situation with multiple connected objects.
@@ -329,8 +322,8 @@ Research is also conducted on the DAP to debug Domain-Specific Languages \cite{j
 The Visual Debugger has increased in popularity, measured by the more than doubling of downloads of the plugin compared to our previous publication \cite{krauterVisualDebuggerTool2022}.
 In this work, we make two contributions related to the Visual Debugger and the broader topic of IDE integration.
 
-% Summarize improvements and new features
-Our first contribution is represented by the improvements and new features we incorporated into the Visual Debugger.
+% Summarize improvements
+Our first contribution is the new improvements we incorporated into the Visual Debugger.
 We have integrated our Visual Debugger more smoothly into the IDE by employing an embedded browser based on the Java Chromium Embedded Framework (JCEF) and improved the performance of loading debugging information.
 Furthermore, the Visual Debugger now highlights changes graphically using colors and overlays, and we implemented a debug history.
 

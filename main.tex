@@ -197,9 +197,9 @@ In addition, the next section discusses recent improvements to the Visual Debugg
 
 % Improvements would be better loading
 \subsection{Improvements} \label{subsec:improvements}
-We made two major improvements to the Visual Debugger, optimizing its integration with the IDE and expanding its applicability to more complex debugging scenarios.
+We made four major improvements to the Visual Debugger, described in detail in the following section.
 
-\textbf{Improvement (1):} We integrated an embedded browser into the Visual Debugger panel inside \intellij{}.
+\textbf{(1) Browser integration:} We integrated an embedded browser into the Visual Debugger panel inside \intellij{}.
 The embedded browser uses the Java Chromium Embedded Framework (JCEF), available by default in \intellij{}.
 As a result, users now have the option to use the embedded instead of an external browser.
 Most of the functionality of our visualization component worked out of the box with the JCEF browser.
@@ -211,7 +211,7 @@ However, integrating web applications into \intellij{} is not entirely seamless,
 Consequently, we give each user the choice to use the embedded or external browser.
 We discuss the problems we faced using JCEF and possible improvements in \autoref{sec:lessonsLearned}.
 
-\textbf{Improvement (2):} We enhanced the loading mechanism for stack frame variables inside the Visual Debugger.
+\textbf{(2) Dynamic loading:} We enhanced the loading mechanism for stack frame variables inside the Visual Debugger.
 Previously, we had to pre-load and cache more debug information than was requested by the user since we could not load debug information on demand.
 The initial load invalidated the underlying stack frame supplied by the Java Debugging Interface (JDI).
 Now, we leverage the APIs provided by \intellij{}, which are a thin wrapper around the JDI.
@@ -219,10 +219,8 @@ This enables us to defer loading additional debug information until explicitly r
 Consequently, there is no longer a need to pre-load potentially unnecessary debug information.
 This optimization has improved performance, making the Visual Debugger applicable to more intricate debugging scenarios.
 
-Furthermore, we enhanced the Visual Debugger by introducing the following two new features:
-
 % Visualizing changes
-\textbf{Feature (1):} The visualization component of the Visual Debugger now \textit{highlights changes} using colors and overlays in the object diagram.
+\textbf{(3) Change highlighting:} The visualization component of the Visual Debugger now \textit{highlights changes} using colors and overlays in the object diagram.
 New objects and links are colored green, while changes to existing elements lead to orange coloring.
 Computing and highlighting the changes is enabled by default but can be switched off.
 \autoref{fig:variables} shows the new change visualization by highlighting one changed and added object accordingly.
@@ -235,7 +233,7 @@ Changes can be calculated efficiently using unique object IDs provided during de
 We implemented the change detection in the visualization component such that it can be reused across programming languages and IDEs \cite{timkrauterICSE2024Artifacts2023}.
 
 % Debug history
-\textbf{Feature (2):} Furthermore, the visualization component now keeps a \textit{debug history} so that a user can see debug information from previous debugging steps.
+\textbf{(4) Debug history:} Furthermore, the visualization component now keeps a \textit{debug history} so that a user can see debug information from previous debugging steps.
 The debug history's length is configurable or can be turned off entirely.
 % Motivation
 As described earlier, software engineers are most interested in how variables change during debugging.

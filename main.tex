@@ -70,16 +70,11 @@
 
 \renewcommand{\shortauthors}{Kräuter et al.}
 \newcommand{\intellij}{IntelliJ IDEA}
-% Four pages + 1 page of references.
 
 \begin{abstract}
-    % One sentence tool description
     The Visual Debugger is an IntelliJ IDEA plugin that presents debug information as an object diagram for improved program understanding.
-    % Past: Lessons learned and roadblocks + experience
     Reflecting on our \textit{past} development, we detail the lessons learned and roadblocks we have experienced while implementing and integrating the Visual Debugger into the IntelliJ IDEA.
-    % Present: Improvements
     Furthermore, we describe recent improvements to the Visual Debugger, greatly enhancing the plugin in the \textit{present}.
-    % Future: possible solutions to the roadblocks and future work
     Looking into the \textit{future}, we propose solutions to overcome the roadblocks encountered while developing the plugin and further plans for the Visual Debugger.
 \end{abstract}
 
@@ -115,13 +110,13 @@ This paper details the experience of implementing, maintaining, and improving th
 The Visual Debugger is available for \intellij{} and Android studio as a plugin \cite{timkrauterVisualDebuggerIntelliJ2023}, however, its architecture makes it adaptable to other Integrated Development Environments (IDEs).
 The Visual Debugger automatically hooks into the IDE's debugging process and graphically depicts the current stack frame variables as an \textit{object diagram} to foster program comprehension \cite{krauterVisualDebuggerTool2022}.
 
+In \cite{krauterVisualDebuggerTool2022}, we introduced the Visual Debugger, describing its architecture and a typical usage scenario, as well as comparing it to related tools.
 The contributions of this paper are twofold:
 
-\textbf{(1)} We describe the improvements made to the Visual Debugger since our last publication \cite{krauterVisualDebuggerTool2022}, see \autoref{sec:visualDebugger}.
-In particular, we detail how we improved the integration of our plugin into \intellij{}.
+\textbf{(1)} We describe key improvements made to the Visual Debugger, see \autoref{sec:visualDebugger}, which aim to enhance program comprehension further and lead to a smoother integration of our plugin into \intellij{}.
 
 \textbf{(2)} We discuss the lessons learned and roadblocks we experienced while developing the Visual Debugger as a plugin for \intellij{}, see \autoref{sec:lessonsLearned}.
-In addition, we propose methods to mitigate these roadblocks to achieve smoother and easier IDE integration in the future. 
+In addition, we propose methods to mitigate these roadblocks to achieve smoother and simpler IDE integration in the future from the perspective of plugin and IDE developers. 
 
 \section{The Visual Debugger} \label{sec:visualDebugger}
 

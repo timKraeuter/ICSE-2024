@@ -176,7 +176,7 @@ The Visual Debugger is separated into two independent components communicating t
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.7\linewidth]{images/visual-debugger-architecture.pdf}
+  \includegraphics[width=0.65\linewidth]{images/visual-debugger-architecture.pdf}
   \caption{Visual Debugger architecture}
   \label{fig:architecture}
 \end{figure}
@@ -293,7 +293,7 @@ Since not all current debuggers will adopt this protocol, an intermediary compon
 
 After the success of the LSP, the DAP could become the next standardized development tool functionality \cite{raskVisualStudioCode2020,borkLanguageServerProtocol2023}.
 The official page of the DAP lists 11 tools supporting the DAP, 67 debug adapters, and 11 DAP SDKs as of December 2024 \cite{microsoftDebugAdapterProtocol2023}, including, for example, a Go DAP implementation maintained by Google \cite{googleGoImplementationDebug2023}.
-Research is also conducted on the DAP to debug Domain-Specific Languages \cite{jeanjeanIDECodeReifying2021,enetProtocolBasedInteractiveDebugging2023}.
+Research is also conducted on the DAP to debug Domain-Specific Languages~\cite{jeanjeanIDECodeReifying2021,enetProtocolBasedInteractiveDebugging2023}.
 
 \begin{figure}[ht]
   \centering
@@ -311,9 +311,14 @@ If the Visual Debugger also supports the DAP in the future, it can attach to the
 As a result, the Visual Debugger becomes compatible with any combination of IDE and programming language that provides a debug adapter.
 For example, the Visual Debugger could be automatically available for more IDEs/Editors, such as GoLand (Go), RustRover (Rust), Netbeans (Java), and Visual Studio Code.
 
+\autoref{fig:Target_Architecture} shows a possible architecture for the Visual Debugger using the DAP.
+Only a light integration for each development tool (IDE, Editor) is needed to get notified about the start of debugging.
+Then, the Visual Debugger can use the provided DAP for all other interactions.
+The Visual Debugging API can then be thought of as a graphical DAP (GDAP) similar to the graphical LSP (GLSP), an adoption of LSP for graphical editors \cite{rodriguez-echeverriaLanguageServerProtocol2018,borkVisionFlexibleGLSPBased2024}.
+
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=1\linewidth]{images/visual-debugger-Target-architecture.pdf}
+  \includegraphics[width=0.8\linewidth]{images/visual-debugger-Target-architecture.pdf}
   \caption{Visual Debugger architecture using the DAP}
   \label{fig:Target_Architecture}
 \end{figure}

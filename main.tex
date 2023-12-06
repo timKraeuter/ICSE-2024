@@ -72,7 +72,7 @@
 \newcommand{\intellij}{IntelliJ IDEA}
 
 \begin{abstract}
-    The Visual Debugger is an IntelliJ IDEA plugin that presents debug information as an object diagram for improved program understanding.
+    The Visual Debugger is an IntelliJ IDEA plugin that presents debug information as an object diagram to enhance program understanding.
     Reflecting on our \textit{past} development, we detail the lessons learned and roadblocks we have experienced while implementing and integrating the Visual Debugger into the IntelliJ IDEA.
     Furthermore, we describe recent improvements to the Visual Debugger, greatly enhancing the plugin in the \textit{present}.
     Looking into the \textit{future}, we propose solutions to overcome the roadblocks encountered while developing the plugin and further plans for the Visual Debugger.
@@ -90,7 +90,7 @@
 
 \ccsdesc[500]{Software and its engineering~Integrated and visual development environments}
 
-\keywords{Debugging, Visual Debugging, IDE plugin, IDE Integration}
+\keywords{Visual Debugging, IDE plugin, IDE Integration}
 
 % Fitting topics from the workshop:
 % 1. The development of plugins, add-ons, and extensions for IDEs.
@@ -244,12 +244,9 @@ Both the \textit{change highlighting} and \textit{debug history} improvements al
 \section{Lessons Learned \& Roadblocks} \label{sec:lessonsLearned}
 
 
-A key takeaway from the experiences we gained from developing our plugin is that there are more useful features than the documentation outlines. 
+A key takeaway from the experiences we gained from developing our plugin is that several useful features and APIs are not or only briefly documented.
 Consequently, after conducting an extensive review of the documentation, it proves advantageous to seek assistance by posing questions in the community forum dedicated to plugin development. 
-When one presents clear and detailed inquiries, prompt and useful responses are collected, making the forum an invaluable resource.
-%The most important lesson we learned is that more features are available for plugin development than what is documented.
-%Thus, after a thorough search in the documentation, it is beneficial to ask a question in the community forum for plugin development.
-%If one asks precise, detailed questions, one receives helpful answers quickly, making the forum an immensely valuable resource.
+One receives quick and useful responses for clear, detailed inquiries, making the forum invaluable.
 For example, our new dynamic loading of debug information discussed in \autoref{subsec:improvements} was enabled due to the \intellij{} forum.
 The forum provides a unique opportunity to interact directly with IDE developers.
 
@@ -261,10 +258,10 @@ We will now describe these roadblocks and possibilities to overcome them in the 
 The IntelliJ Platform is built on Java, and plugin UIs utilize the Swing framework.
 However, we could not find a suitable diagramming framework for Swing to implement an interactive object diagram for our visualization component.
 \intellij{} uses \textit{yFiles} \cite{yworksYFilesDiagrammingLibrary2023}, for example, to visualize generated class diagrams from source code.
-For us, \textit{yFiles} was not an option because the cheapest license already carries a significant cost, and we do not plan to monetize our plugin.
+For us, \textit{yFiles} was not an option because the cheapest license already carries a significant cost, while we do not plan to monetize our plugin.
 
-Thus, we started with an embedded visualizer using PlantUML \cite{arnaudroquesPlantUML2023} to generate pictures of object diagrams.
-Finally, to allow interactions with object diagrams, we opted for the free and open-source \textit{diagram-js} library to implement our web-based library \textit{object-diagram-js} \cite{timkrauterObjectdiagramjs2023} used in the Visual Debugger.
+We started with an embedded visualizer using PlantUML \cite{arnaudroquesPlantUML2023} to generate pictures of object diagrams.
+Moreover, to allow interactions with object diagrams, we opted for the free and open-source \textit{diagram-js} library to implement our web-based library \textit{object-diagram-js} \cite{timkrauterObjectdiagramjs2023} used in the Visual Debugger.
 To summarize, the rich web ecosystem and its growing popularity among developers have led us to a web-based visualization.
 Integrating a web-based UI into \intellij{} is not obvious compared to other IDEs, such as Visual Studio Code, which is built on web technologies and heavily uses web views for extensions.
 
@@ -292,7 +289,7 @@ The motivation is that debuggers have to be implemented only once for each langu
 Since not all current debuggers will adopt this protocol, an intermediary component is envisioned to adapt an existing debugger to the DAP \cite{microsoftDebugAdapterProtocol2023}, see \textit{debug adapters} in \autoref{fig:DAP_Architecture}.
 
 After the success of the LSP, the DAP could become the next standardized development tool functionality \cite{raskVisualStudioCode2020,borkLanguageServerProtocol2023}.
-The official page of the DAP lists 11 tools supporting the DAP, 67 debug adapters, and 11 DAP SDKs as of December 2024 \cite{microsoftDebugAdapterProtocol2023}, including, for example, a Go DAP implementation maintained by Google \cite{googleGoImplementationDebug2023}.
+The official page of the DAP lists 11 tools supporting the DAP, 67 debug adapters, and 11 DAP SDKs as of December 2023 \cite{microsoftDebugAdapterProtocol2023}, including, for example, a Go DAP implementation maintained by Google \cite{googleGoImplementationDebug2023}.
 Research is also conducted on the DAP to debug Domain-Specific Languages~\cite{jeanjeanIDECodeReifying2021,enetProtocolBasedInteractiveDebugging2023}.
 
 \begin{figure}[ht]
@@ -303,11 +300,11 @@ Research is also conducted on the DAP to debug Domain-Specific Languages~\cite{j
 \end{figure}
 
 Like our visual debugging API, the DAP is independent of development tools (as shown on the left side of \autoref{fig:DAP_Architecture}) and is also language-agnostic (as depicted on the right side of \autoref{fig:DAP_Architecture}).
-How JetBrains or other IDEs communicate with its integrated debuggers does not have to use the DAP.
+How JetBrains or other IDEs communicate with its integrated debuggers must not be changed to the DAP.
 However, each IDE could provide debug adapters for the supported programming languages or integrate existing debug adapters into the IDE.
 In addition, using a standard protocol requires minimal documentation and leads to fewer support inquiries.
 
-If the Visual Debugger also supports the DAP in the future, it can attach to the different debug adapters, which all provide the DAP, i.e., the same interface.
+When the Visual Debugger also supports the DAP in the future, it can attach to the different debug adapters, which all provide the DAP, i.e., the same interface.
 As a result, the Visual Debugger becomes compatible with any combination of IDE and programming language that provides a debug adapter.
 For example, the Visual Debugger could be automatically available for more IDEs/Editors, such as GoLand (Go), RustRover (Rust), Netbeans (Java), and Visual Studio Code.
 
@@ -330,25 +327,24 @@ In this work, we make two contributions related to the Visual Debugger and the b
 
 % Summarize improvements
 Our first contribution is the new improvements we incorporated into the Visual Debugger.
-We have integrated our Visual Debugger more smoothly into the IDE by employing an embedded browser based on the Java Chromium Embedded Framework (JCEF) and improved the performance of loading debugging information.
-Furthermore, the Visual Debugger now highlights changes graphically using colors and overlays, and we implemented a debug history.
+We integrate our Visual Debugger more smoothly into the IDE by employing an embedded browser based on the Java Chromium Embedded Framework (JCEF) and improve the performance of loading debugging information.
+Furthermore, the Visual Debugger now highlights changes graphically using colors and provides a debug history.
 
 % Summarize roadblocks and their solutions
 Our second contribution is detailing the experience gained by implementing the Visual Debugger.
-We described two major roadblocks hampering tighter IDE integration of our plugin.
+We describe two major roadblocks hampering tighter IDE integration of our plugin.
 First, integrating web-based user interfaces that use the extensive and popular web ecosystem is not trivial.
 Using the JCEF makes this integration possible, but its visibility and documentation should be improved.
 Second, not all IDEs offer debugging-related APIs such that we could integrate our plugin.
 To make debugging functionality uniformly accessible for plugin development, we propose to utilize the standardized Debug Adapter Protocol (DAP).
 
 % Future work
-In future work, we aim to adapt the Visual Debugger for other IDEs and code editors such as GoLang, Eclipse \cite{desrivieresEclipsePlatformIntegrating2004}, and Visual Studio Code since this has been requested by our users.
-We aim to implement the DAP to minimize the integration effort and development cost for the different IDEs.
+In future work, we aim to adapt the Visual Debugger for other IDEs and code editors such as GoLand, Eclipse \cite{desrivieresEclipsePlatformIntegrating2004}, and Visual Studio Code since this has been requested by our users.
+We aim to implement the DAP for the Visual Debugger to minimize the integration effort and development cost for the different IDEs.
 
-Furthermore, it would be interesting to study the usability of the Visual Debugger and its impact on program comprehension.
+Furthermore, it would be interesting to study the usability and scalability of the Visual Debugger and its impact on program comprehension.
 It seems interesting to find out in which scenarios visual debugging is more effective than textual debugging and vice versa.
 Since the Visual Debugger is \textit{not} meant to replace the textual debugger, one should also include a combination of both textual and visual debugging in an empirical study.
-% In addition, we plan to investigate how well our visualization component scales for object diagrams of increasing size.
 
 % Add acknowledgments after review
 % \section{Acknowledgments}

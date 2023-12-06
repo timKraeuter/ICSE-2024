@@ -146,7 +146,7 @@ Traditionally, stack frame variables are represented textually, such as in \auto
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.475\textwidth]{images/visual-debugger-variables.pdf}
+    \includegraphics[width=1\linewidth]{images/visual-debugger-variables.pdf}
     \caption{Binary Search Tree (BST) during debugging}
     \label{fig:variables}
 \end{figure}
@@ -176,8 +176,8 @@ The Visual Debugger is separated into two independent components communicating t
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.65\linewidth]{images/visual-debugger-architecture.pdf}
-  \caption{Visual debugger architecture}
+  \includegraphics[width=0.7\linewidth]{images/visual-debugger-architecture.pdf}
+  \caption{Visual Debugger architecture}
   \label{fig:architecture}
 \end{figure}
 
@@ -298,7 +298,7 @@ Research is also conducted on the DAP to debug Domain-Specific Languages \cite{j
 \begin{figure}[ht]
   \centering
   \includegraphics[width=1\linewidth]{images/visual-debugger-DAP-architecture.pdf}
-  \caption{Debug Adapter Protocol Architecture \cite{microsoftDebugAdapterProtocol2023}}
+  \caption{Debug adapter protocol architecture \cite{microsoftDebugAdapterProtocol2023}}
   \label{fig:DAP_Architecture}
 \end{figure}
 
@@ -310,6 +310,13 @@ In addition, using a standard protocol requires minimal documentation and leads 
 If the Visual Debugger also supports the DAP in the future, it can attach to the different debug adapters, which all provide the DAP, i.e., the same interface.
 As a result, the Visual Debugger becomes compatible with any combination of IDE and programming language that provides a debug adapter.
 For example, the Visual Debugger could be automatically available for more IDEs/Editors, such as GoLand (Go), RustRover (Rust), Netbeans (Java), and Visual Studio Code.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=1\linewidth]{images/visual-debugger-Target-architecture.pdf}
+  \caption{Visual Debugger architecture using the DAP}
+  \label{fig:Target_Architecture}
+\end{figure}
 
 \section{Conclusion \& Future work} \label{sec:conclusion}
 % Conclusion

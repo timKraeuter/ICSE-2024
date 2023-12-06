@@ -250,35 +250,35 @@ Both the \textit{change highlighting} and \textit{debug history} improvements al
 The most important lesson we learned is that more features are available during plugin development than what is documented.
 Thus, after a thorough search in the documentation, it is beneficial to ask a question in the community forum for plugin development.
 If one asks precise, detailed questions, one receives helpful answers quickly, making the forum an immensely valuable resource.
-For example, our new deferred loading of debug information discussed in \autoref{subsec:improvements} was enabled due to the \intellij{} forum.
-The forum provides the rare opportunity to interact directly with JetBrains developers.
+For example, our new dynamic loading of debug information discussed in \autoref{subsec:improvements} was enabled due to the \intellij{} forum.
+The forum provides the rare opportunity to interact directly with IDE developers.
 
 While developing the Visual Debugger plugin, we encountered two significant roadblocks.
-In the remaining portion of this section, we will describe these roadblocks and how to overcome them in the future.
+We will now describe these roadblocks and possibilities to overcome them in the future.
 
-% Roadblock 1: IDE integration due to IDE UI technology --> See notes --> JCEF
-\textbf{Roadblock (1):} Creating a user interface with interactive diagramming capabilities and integrating it into \intellij{} was challenging for different reasons.
-The IntelliJ Platform is built on Java, and plugin user interfaces utilize the Swing framework.
-However, we could not find a diagramming framework for Swing to implement an interactive object diagram for our visualization component.
+% Roadblock 1: No native support for web-based UIs.
+\textbf{(1) No native support for web-based UIs:} Creating a user interface (UI) with interactive diagramming capabilities and integrating it into \intellij{} was challenging for different reasons.
+The IntelliJ Platform is built on Java, and plugin UIs utilize the Swing framework.
+However, we could not find a suitable diagramming framework for Swing to implement an interactive object diagram for our visualization component.
 \intellij{} uses \textit{yFiles} \cite{yworksYFilesDiagrammingLibrary2023}, for example, to visualize generated class diagrams from source code.
 For us, \textit{yFiles} was not an option because the cheapest license already carries a significant cost, and we do not plan to monetize our plugin.
 
 Thus, we started with an embedded visualizer using PlantUML \cite{arnaudroquesPlantUML2023} to generate pictures of object diagrams.
 Finally, to allow interactions with object diagrams, we opted for the free and open-source \textit{diagram-js} library to implement our web-based library \textit{object-diagram-js} \cite{timkrauterObjectdiagramjs2023} used in the Visual Debugger.
 To summarize, the rich web ecosystem and its growing popularity among developers have led us to a web-based visualization.
-Integrating a web-based user interface into \intellij{} is not obvious compared to other IDEs, such as Visual Studio Code, which is built on web technologies and heavily uses web views for extensions.
+Integrating a web-based UI into \intellij{} is not obvious compared to other IDEs, such as Visual Studio Code, which is built on web technologies and heavily uses web views for extensions.
 
-To integrate our web-based user interface into \intellij{}, we now use JCEF as described in \autoref{subsec:improvements}.
+To integrate our web-based UI into \intellij{}, we now use JCEF as described in \autoref{subsec:improvements}.
 We were unaware of this possibility for an extended period.
 We believe the plugin documentation regarding JCEF and web views has room for improvement to take full advantage of the rich web ecosystem.
 First, it should be more visible that the integration of web views is possible.
 Second, the integration poses challenges that can be reduced by more extensive documentation about JCEF.
 We authored a pull request to improve the plugin documentation, incorporating insights from our experience with the Visual Debugger.
 
-% Roadblock 2: Missing APIs for less popular IDEs.
-\textbf{Roadblock (2):} Other IDEs than \intellij{} are missing debugging APIs to implement our plugin.
+% Roadblock 2: Missing debugging API in most other IDEs.
+\textbf{(2) Missing debugging APIs:} Other IDEs than \intellij{} are missing a debugging API to implement our plugin.
 Users of the Visual Debugger have asked us if the plugin could be adapted to work with other IDEs and programming languages.
-For example, we would like to support debugging \textit{Go} applications inside the GoLand IDE, as requested by a user of the Visual Debugger.
+For example, we would like to support debugging \textit{Go} applications inside the GoLand IDE, as requested by a user.
 However, compared to \intellij{} plugins, there is no API to hook into debugging processes in GoLand.
 Thus, it is currently impossible to adapt the Visual Debugger for GoLand to integrate with the IDE seamlessly.
 Our visualization component cannot operate without a debugging component that provides debugging information from GoLand.
@@ -314,7 +314,7 @@ For example, the Visual Debugger could be automatically available for more IDEs/
 \autoref{fig:Target_Architecture} shows a possible architecture for the Visual Debugger using the DAP.
 Only a light integration for each development tool (IDE, Editor) is needed to get notified about the start of debugging.
 Then, the Visual Debugger can use the provided DAP for all other interactions.
-The Visual Debugging API can then be thought of as a graphical DAP (GDAP) similar to the graphical LSP (GLSP), an adoption of LSP for graphical editors \cite{rodriguez-echeverriaLanguageServerProtocol2018,borkVisionFlexibleGLSPBased2024}.
+The Visual Debugging API can then be thought of as a graphical DAP (GDAP) similar to the graphical LSP (GLSP), an adoption of the LSP for graphical editors \cite{rodriguez-echeverriaLanguageServerProtocol2018,borkVisionFlexibleGLSPBased2024}.
 
 \begin{figure}[ht]
   \centering

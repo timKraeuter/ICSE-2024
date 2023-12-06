@@ -30,7 +30,7 @@
 %%
 %% The "title" command has an optional parameter,
 %% allowing the author to define a "short title" in page headers.
-\title{Implementing the Visual Debugger: Past, Present, and Future}
+\title{The Visual Debugger: Past, Present, and Future}
 
 \author{Tim Kr\"{a}uter}
 \email{tkra@hvl.no}
@@ -152,7 +152,7 @@ The Visual Debugger visualizes the variables in the scope of the debugging sessi
 \autoref{fig:variables} (a) and (b) contain the same objects and level of detail, despite \textit{null values} being ignored in the Visual Debugger.
 However, the coloring in \autoref{fig:variables} highlights changes and additions, a new feature of the Visual Debugger discussed in \autoref{subsec:improvements}.
 
-The graphical visualization does not replace the textual debugging view but aims to improve program comprehension during debugging~\cite{krauterVisualDebuggerTool2022}.
+The graphical visualization does not replace the textual debugging view but aims to augment the debugging experience to improve program comprehension~\cite{krauterVisualDebuggerTool2022}.
 Concretely, the Visual Debugger is \textit{non-intrusive} since it can be used alongside the traditional textual debugging available in the IDE.
 
 The Visual Debugger automatically updates the debug information as the \intellij{} debugger whenever a user steps through the source code or reaches a new breakpoint.
@@ -221,6 +221,7 @@ Computing and highlighting the changes is enabled by default but can be switched
 % Motivation
 A software engineer is usually most interested in the changes that occur to the objects during debugging.
 Our color-based visualization of changes in the object diagram makes it easier for a software engineer to see changes even when dealing with a complex debugging situation with multiple connected objects.
+Thus, the change highlighting contributes to our goal of enhancing program comprehension.
 
 % Implementation
 Changes can be calculated efficiently using unique object IDs provided during debugging.
@@ -243,11 +244,14 @@ Both the \textit{change highlighting} and \textit{debug history} improvements al
 \section{Lessons Learned \& Roadblocks} \label{sec:lessonsLearned}
 
 
-The most important lesson we learned is that more features are available during plugin development than what is documented.
-Thus, after a thorough search in the documentation, it is beneficial to ask a question in the community forum for plugin development.
-If one asks precise, detailed questions, one receives helpful answers quickly, making the forum an immensely valuable resource.
+A key takeaway from the experiences we gained from developing our plugin is that there are more useful features than the documentation outlines. 
+Consequently, after conducting an extensive review of the documentation, it proves advantageous to seek assistance by posing questions in the community forum dedicated to plugin development. 
+When one presents clear and detailed inquiries, prompt and useful responses are collected, making the forum an invaluable resource.
+%The most important lesson we learned is that more features are available for plugin development than what is documented.
+%Thus, after a thorough search in the documentation, it is beneficial to ask a question in the community forum for plugin development.
+%If one asks precise, detailed questions, one receives helpful answers quickly, making the forum an immensely valuable resource.
 For example, our new dynamic loading of debug information discussed in \autoref{subsec:improvements} was enabled due to the \intellij{} forum.
-The forum provides the rare opportunity to interact directly with IDE developers.
+The forum provides a unique opportunity to interact directly with IDE developers.
 
 While developing the Visual Debugger plugin, we encountered two significant roadblocks.
 We will now describe these roadblocks and possibilities to overcome them in the future.
@@ -344,6 +348,7 @@ We aim to implement the DAP to minimize the integration effort and development c
 Furthermore, it would be interesting to study the usability of the Visual Debugger and its impact on program comprehension.
 It seems interesting to find out in which scenarios visual debugging is more effective than textual debugging and vice versa.
 Since the Visual Debugger is \textit{not} meant to replace the textual debugger, one should also include a combination of both textual and visual debugging in an empirical study.
+% In addition, we plan to investigate how well our visualization component scales for object diagrams of increasing size.
 
 % Add acknowledgments after review
 % \section{Acknowledgments}

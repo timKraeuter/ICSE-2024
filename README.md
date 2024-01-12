@@ -1,6 +1,6 @@
 # ICSE-2024
 
-This repository contains the sources of [our paper](./paper.pdf) submitted to the IDE Workshop at the [46th International Conference on Software Engineering (ICSE 2024)](https://conf.researchr.org/home/icse-2024) and associated artifacts.
+This repository contains the sources of [our paper](./paper.pdf) published at the IDE Workshop at the [46th International Conference on Software Engineering (ICSE 2024)](https://conf.researchr.org/home/icse-2024) and associated artifacts.
 
 The paper describes our experience and lessons learned from implementing the [open-source](https://github.com/timKraeuter/VisualDebugger) [Visual Debugger](https://plugins.jetbrains.com/plugin/16851-visual-debugger).
 

@@ -320,19 +320,19 @@ The Visual Debugging API can then be thought of as a graphical DAP (GDAP) simila
 \end{figure}
 
 \section{State of the art} \label{sec:relatedWork}
-Visual debugging has been researched since the 90s \cite{jerdingUsingVisualizationFoster1994, mukherjeaVisualDebuggingIntegrating1994, hansonSimpleExtensibleGraphical1997}, but most of the resulting tools have not become mainstream or integrated with modern IDEs.
-We will now present three tools that are still relevant today and compare them to the visual debugger to describe how our contribution fits into the current state of the art.
+Visual debugging has been researched since the 90s \cite{jerdingUsingVisualizationFoster1994, mukherjeaVisualDebuggingIntegrating1994, hansonSimpleExtensibleGraphical1997}, but most of the resulting tools have yet to become mainstream or integrated with modern IDEs.
+We will now present three tools that are still relevant today and compare them to the visual debugger to describe how our contribution fits into the state of the art.
 
 % Data Display Debugger
 The \textbf{Data Display Debugger (DDD)}\footnote{\url{https://www.gnu.org/software/ddd/}} provides a graphical data visualization as a box-and-pointer diagram \cite{zellerDDDFreeGraphical1996}.
-DDD is a graphical standalone debugger that relies on command-line debuggers such as the GNU debugger.
-Using DDD and the GNU debugger one can debug executable binaries originally written in C, C\texttt{++}, Go, Rust and more.
-However, there are also other command-line debuggers that can be used to debug programs written, for example, in Java or Python.
-DDD is a powerful tool and to the best of our knowledge the first debugger which includes data visualization.
+DDD is a graphical standalone debugger that relies on command-line debuggers like the GNU debugger.
+Using DDD and the GNU debugger, one can debug executable binaries originally written in C, C\texttt{++}, Go, Rust, and more.
+However, other command-line debuggers can be used to debug programs written, for example, in Java or Python.
+DDD is a powerful tool and, to our knowledge, the first debugger which includes data visualization.
 
 DDD and the visual debugger are similar since box-and-pointer diagrams are equivalent to object diagrams when switching to the object-oriented programming paradigm.
-However, our tool is deeply integrated with \intellij{}, while DDD is a standalone tool that is used for compiled executable binaries.
-Furthermore, the visual debugger incorporates advanced features such as \textit{dynamic loading}, \textit{change highlighting} and a \textit{debug history} which helps dealing with complicated debugging scenarios.
+However, our tool is deeply integrated with \intellij{}, while DDD is a standalone tool used for compiled executable binaries.
+Furthermore, the visual debugger incorporates advanced features such as \textit{dynamic loading}, \textit{change highlighting} and a \textit{debug history} which helps deal with complicated debugging scenarios.
 
 % JIVE
 \textbf{Java Interactive Visualization Environment (JIVE)}\footnote{\url{https://cse.buffalo.edu/jive/}} is a plugin for the Eclipse IDE \cite{gestwickiJIVEJavaInteractive2004}.
@@ -342,21 +342,21 @@ Furthermore, it allows reverse stepping and even contains features for extractin
 JIVE provides a custom debugging environment inside the Eclipse IDE to provide its powerful debugging features.
 
 Compared to JIVE, the visual debugger works alongside debugging in the IDE and focuses on object diagram visualization of stack frame variables.
-Similarly, to reverse stepping we provide the debug history feature.
-The focus of the visual debugger is on simplicity, usability and seamless integration with the IDE while JIVE focuses on advanced debugging features which might be harder to understand.
-Furthermore, we decouple debugging and visualization such that we can reuse the visualization across different IDEs while JIVE is tied to Java and Eclipse.
+Similar to reverse stepping, we provide the debug history feature.
+The visual debugger focuses on simplicity, usability, and seamless integration with the IDE, while JIVE focuses on advanced debugging features that might be harder to understand.
+Furthermore, we decouple debugging and visualization to reuse the visualization across different IDEs while JIVE is tied to Java and Eclipse.
 
 % Java Visualizer
-The \textbf{Java Visualizer} has been developed as a plugin for the \intellij{} to be used for teaching purposes \cite{lipsitzJavaVisualizerIntelliJ2024}.
-Similar to the visual debugger it hooks into the debugging process and visualizes the stack frame variables.
+The \textbf{Java Visualizer} has been developed as a plugin for the \intellij{} for teaching purposes \cite{lipsitzJavaVisualizerIntelliJ2024}.
+Like the visual debugger, it hooks into the debugging process and visualizes the stack frame variables.
 Nevertheless, it visualizes variables as a box-and-pointer diagram and depicts all stack frames and their order on the call stack.
-The call stack and box-and-pointer diagram is then updated for each debugging step in the IDE.
+The call stack and box-and-pointer diagram are then updated for each debugging step in the IDE.
 
-The Java Visualizer is a helpful tool which has inspired the development of the visual debugger.
+The Java Visualizer is a helpful tool that has inspired the development of the visual debugger.
 However, even in simple situations, the visualization can get complex since it includes all variables from the Java heap, not just the variables within the current stack frame, i.e., the debugging scope.
-While this can be an advantage it often quickly clutters the visualization, especially if one is only interested in the variables within the current scope.
-On the contrary, the visual debugger only shows relevant information from the present scope even filtering the initial depth of the visualization.
-In addition, we provide advanced features such as \textit{change highlighting} which become particularly useful as diagrams grow in size.
+While this can be an advantage, it often quickly clutters the visualization, especially if one is only interested in the variables within the current scope.
+On the contrary, the visual debugger only shows relevant information from the present scope, even filtering the initial depth of the visualization.
+In addition, we provide advanced features such as \textit{change highlighting}, which become particularly useful as diagrams grow in size.
 
 
 \section{Conclusion \& Future work} \label{sec:conclusion}

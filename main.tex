@@ -97,8 +97,8 @@
 % 3. Anecdotal experience about why a certain tool or research approach was not implemented on top of the IDE infrastructure, but researchers chose alternatives (e.g., a CLI tool), what the blockers were, and how the IDEs can improve to become more convenient for prototyping.
 
 \received{7 December 2023}
-% \received[revised]{7 December 2023}
-% \received[accepted]{11 January 2024}
+% \received[revised]{25 January 2024}
+\received[accepted]{25 January 2024}
 
 \maketitle
 
@@ -106,13 +106,13 @@
 
 \section{Introduction}
 This paper details the experience of implementing, maintaining, and improving the \textit{Visual Debugger} \cite{krauterVisualDebuggerTool2022}.
-The Visual Debugger is available for \intellij{} and Android studio as a plugin \cite{timkrauterVisualDebuggerIntelliJ2023}, however, its architecture makes it adaptable to other Integrated Development Environments (IDEs).
+The Visual Debugger is available for \intellij{} and Android studio as a plugin \cite{timkrauterVisualDebuggerIntelliJ2024}, however, its architecture makes it adaptable to other Integrated Development Environments (IDEs).
 The Visual Debugger automatically hooks into the IDE's debugging process and graphically depicts the current stack frame variables as an \textit{object diagram} to foster program comprehension \cite{krauterVisualDebuggerTool2022}.
 
 In \cite{krauterVisualDebuggerTool2022}, we introduced the Visual Debugger, describing its architecture and a typical usage scenario, as well as comparing it to related tools.
 The contributions of this paper are twofold:
 
-\textbf{(1)} We describe key improvements made to the Visual Debugger, see \autoref{sec:visualDebugger}, which aim to enhance program comprehension further and lead to a smoother integration of our plugin into \intellij{}.
+\textbf{(1)} We describe key improvements made to the Visual Debugger since \cite{krauterVisualDebuggerTool2022}, see \autoref{sec:visualDebugger}, which aim to enhance program comprehension further and lead to a smoother integration of our plugin into \intellij{}.
 
 \textbf{(2)} We discuss the lessons learned and roadblocks we experienced while developing the Visual Debugger as a plugin for \intellij{}, see \autoref{sec:lessonsLearned}.
 In addition, we propose methods to mitigate these roadblocks to achieve smoother and simpler IDE integration in the future from the perspective of plugin and IDE developers. 
@@ -121,7 +121,7 @@ In addition, we propose methods to mitigate these roadblocks to achieve smoother
 
 % What can the tool do?
 The Visual Debugger is an open-source IDE plugin that visualizes the stack frame variables as an object diagram to improve program comprehension.
-It is available for \intellij{} and Android Studio through the JetBrains Marketplace \cite{timkrauterVisualDebuggerIntelliJ2023, timkrauterVisualDebuggerTool2023} making use of the IntelliJ Platform \cite{kurbatovaIntelliJPlatformFramework2021}.
+It is available for \intellij{} and Android Studio through the JetBrains Marketplace \cite{timkrauterVisualDebuggerIntelliJ2024, timkrauterVisualDebuggerTool2023} making use of the IntelliJ Platform \cite{kurbatovaIntelliJPlatformFramework2021}.
 We integrated our plugin into \intellij{}, the most used Java IDE, with approximately 70\% market share as per the JVM Ecosystem Report 2021 \cite{brianvermeerJVMEcosystemReport2021}.
 
 % Motivation
@@ -129,10 +129,10 @@ Desired debugging information might not be present in the top-level variables an
 Thus, in specific scenarios, especially when data is hierarchically structured, a graphical representation results in a faster and better understanding of the stack frame variables \cite{krauterVisualDebuggerTool2022}.
 
 % Feedback for the tool and current vs previous downloads.
-Until now, we have only received positive feedback regarding the Visual Debugger, which now has close to 7500 downloads\footnote{Last checked on the 6th of December, 2023, see \cite{timkrauterVisualDebuggerIntelliJ2023}.}.
-This marks a more than twofold increase in downloads compared to the initial release of our research paper \cite{krauterVisualDebuggerTool2022} on July 21, 2022, which garnered approximately 2700 downloads.
+Until now, we have only received positive feedback regarding the Visual Debugger, which now has close to 8500 downloads\footnote{Last checked on the 22nd of January, 2024, see \cite{timkrauterVisualDebuggerIntelliJ2024}.}.
+This marks a more than threefold increase in downloads compared to the initial release of our research paper \cite{krauterVisualDebuggerTool2022} on July 21, 2022, which garnered approximately 2700 downloads.
 
-Additional artifacts, including source code, a demonstration of the Visual Debugger tool, and a description of the Visual Debugging API, can be found in \cite{timkrauterICSE2024Artifacts2023}.
+Additional artifacts, including source code, a demonstration of the Visual Debugger tool, and a description of the Visual Debugging API, can be found in \cite{timkrauterICSE2024Artifacts2024}.
 
 \subsection{Description}
 
@@ -159,7 +159,7 @@ Moreover, the objects a debugging variable refers to can be loaded by double-cli
 For example, in \autoref{fig:variables}, all objects the green object refers to were loaded.
 The goal is to make the Visual Debugger \textit{familiar} by adopting how textual debuggers work such that a transition is smooth.
 
-A new video demonstration of the Visual Debugger is available at \url{https://www.youtube.com/watch?v=LsAMTnLxWJw}, showcasing the improvements discussed in \autoref{subsec:improvements}.
+A new video demonstration of the Visual Debugger is available at \url{https://www.youtube.com/watch?v=LsAMTnLxWJw}, showcasing the improvements discussed in \autoref{subsec:improvements}, which were made since our last publication \cite{krauterVisualDebuggerTool2022}.
 
 \subsection{Architecture}
 In this section, we briefly summarize the architecture of the Visual Debugger.
@@ -169,7 +169,7 @@ The Visual Debugger is separated into two independent components communicating t
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.62\linewidth]{images/visual-debugger-architecture.pdf}
+  \includegraphics[width=0.7\linewidth]{images/visual-debugger-architecture.pdf}
   \caption{Visual Debugger architecture}
   \label{fig:architecture}
 \end{figure}
@@ -224,7 +224,7 @@ Thus, the change highlighting contributes to our goal of enhancing program compr
 
 % Implementation
 Changes can be calculated efficiently using unique object IDs provided during debugging.
-We implemented the change detection in the visualization component such that it can be reused across programming languages and IDEs \cite{timkrauterICSE2024Artifacts2023}.
+We implemented the change detection in the visualization component such that it can be reused across programming languages and IDEs \cite{timkrauterICSE2024Artifacts2024}.
 
 % Debug history
 \textbf{(4) Debug history:} Furthermore, the visualization component now keeps a \textit{debug history} so that a user can see debug information from previous debugging steps.
@@ -314,14 +314,54 @@ The Visual Debugging API can then be thought of as a graphical DAP (GDAP) simila
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.99\linewidth]{images/visual-debugger-Target-architecture.pdf}
+  \includegraphics[width=1\linewidth]{images/visual-debugger-Target-architecture.pdf}
   \caption{Visual Debugger architecture using the DAP}
   \label{fig:Target_Architecture}
 \end{figure}
 
+\section{State of the art} \label{sec:relatedWork}
+Visual debugging has been researched since the 90s \cite{jerdingUsingVisualizationFoster1994, mukherjeaVisualDebuggingIntegrating1994, hansonSimpleExtensibleGraphical1997}, but most of the resulting tools have not become mainstream or integrated with modern IDEs.
+We will now present three tools that are still relevant today and compare them to the visual debugger to describe how our contribution fits into the current state of the art.
+
+% Data Display Debugger
+The \textbf{Data Display Debugger (DDD)}\footnote{\url{https://www.gnu.org/software/ddd/}} provides a graphical data visualization as a box-and-pointer diagram \cite{zellerDDDFreeGraphical1996}.
+DDD is a graphical standalone debugger that relies on command-line debuggers such as the GNU debugger.
+Using DDD and the GNU debugger one can debug executable binaries originally written in C, C\texttt{++}, Go, Rust and more.
+However, there are also other command-line debuggers that can be used to debug programs written, for example, in Java or Python.
+DDD is a powerful tool and to the best of our knowledge the first debugger which includes data visualization.
+
+DDD and the visual debugger are similar since box-and-pointer diagrams are equivalent to object diagrams when switching to the object-oriented programming paradigm.
+However, our tool is deeply integrated with \intellij{}, while DDD is a standalone tool that is used for compiled executable binaries.
+Furthermore, the visual debugger incorporates advanced features such as \textit{dynamic loading}, \textit{change highlighting} and a \textit{debug history} which helps dealing with complicated debugging scenarios.
+
+% JIVE
+\textbf{Java Interactive Visualization Environment (JIVE)}\footnote{\url{https://cse.buffalo.edu/jive/}} is a plugin for the Eclipse IDE \cite{gestwickiJIVEJavaInteractive2004}.
+It provides different visualizations during program execution.
+Stack frame variables are visualized as an object diagram, while the call history is represented as a compacted UML sequence diagram \cite{jayaramanCompactVisualizationJava2017}.
+Furthermore, it allows reverse stepping and even contains features for extracting a finite-state model to allow property checking \cite{k.p.FiniteStateModel2021}.
+JIVE provides a custom debugging environment inside the Eclipse IDE to provide its powerful debugging features.
+
+Compared to JIVE, the visual debugger works alongside debugging in the IDE and focuses on object diagram visualization of stack frame variables.
+Similarly, to reverse stepping we provide the debug history feature.
+The focus of the visual debugger is on simplicity, usability and seamless integration with the IDE while JIVE focuses on advanced debugging features which might be harder to understand.
+Furthermore, we decouple debugging and visualization such that we can reuse the visualization across different IDEs while JIVE is tied to Java and Eclipse.
+
+% Java Visualizer
+The \textbf{Java Visualizer} has been developed as a plugin for the \intellij{} to be used for teaching purposes \cite{lipsitzJavaVisualizerIntelliJ2024}.
+Similar to the visual debugger it hooks into the debugging process and visualizes the stack frame variables.
+Nevertheless, it visualizes variables as a box-and-pointer diagram and depicts all stack frames and their order on the call stack.
+The call stack and box-and-pointer diagram is then updated for each debugging step in the IDE.
+
+The Java Visualizer is a helpful tool which has inspired the development of the visual debugger.
+However, even in simple situations, the visualization can get complex since it includes all variables from the Java heap, not just the variables within the current stack frame, i.e., the debugging scope.
+While this can be an advantage it often quickly clutters the visualization, especially if one is only interested in the variables within the current scope.
+On the contrary, the visual debugger only shows relevant information from the present scope even filtering the initial depth of the visualization.
+In addition, we provide advanced features such as \textit{change highlighting} which become particularly useful as diagrams grow in size.
+
+
 \section{Conclusion \& Future work} \label{sec:conclusion}
 % Conclusion
-The Visual Debugger has increased in popularity, measured by the more than doubling of downloads of the plugin compared to our previous publication \cite{krauterVisualDebuggerTool2022}.
+The Visual Debugger has increased in popularity, measured by the more than tripling of downloads of the plugin compared to our previous publication \cite{krauterVisualDebuggerTool2022}.
 In this work, we make two contributions related to the Visual Debugger and the broader topic of IDE integration.
 
 % Summarize improvements
@@ -338,15 +378,15 @@ Second, not all IDEs offer debugging-related APIs such that we could integrate o
 To make debugging functionality uniformly accessible for plugin development, we propose to utilize the standardized Debug Adapter Protocol (DAP).
 
 % Future work
-In future work, we aim to adapt the Visual Debugger for other IDEs and code editors such as GoLand, Eclipse \cite{desrivieresEclipsePlatformIntegrating2004}, and Visual Studio Code since this has been requested by our users.
+In future work, we aim to adapt the Visual Debugger for other IDEs and code editors such as GoLand, Eclipse \cite{desrivieresEclipsePlatformIntegrating2004}, and Visual Studio Code since our users have requested this.
 We aim to implement the DAP for the Visual Debugger to minimize the integration effort and development cost for the different IDEs.
 
-Furthermore, it would be interesting to study the usability and scalability of the Visual Debugger and its impact on program comprehension.
+Furthermore, we aim to study the usability and scalability of the Visual Debugger and its impact on program comprehension.
 It seems interesting to find out in which scenarios visual debugging is more effective than textual debugging and vice versa.
 Since the Visual Debugger is \textit{not} meant to replace the textual debugger, one should also include a combination of both textual and visual debugging in an empirical study.
 
-% Add acknowledgments after review
 % \section{Acknowledgments}
+% We thank the anonymous reviewers for their valuable comments and helpful suggestions.
 
 \renewcommand\UrlFont{\color{black}}
 
